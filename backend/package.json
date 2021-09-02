@@ -5,14 +5,12 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon",
+    "start": "npm run build && NODE_ENV=production node dist/server.js",
+    "dev": "NODE_ENV=development nodemon",
     "build": "tsc && npx tsc-alias",
     "test": "jest --forceExit --detectOpenHandles",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
-    "lint:fix": "npm run lint -- --fix",
-    "deploy:prod": "npm run build && pm2 start ecosystem.config.js --only prod",
-    "deploy:dev": "pm2 start ecosystem.config.js --only dev"
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -22,7 +20,6 @@
     "config": "^3.3.6",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "envalid": "^7.1.0",
     "express": "^4.17.1",
@@ -31,7 +28,6 @@
     "jest": "^27.0.6",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "pm2": "^5.1.0",
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "swagger-jsdoc": "^6.0.0",
@@ -66,8 +62,6 @@
     "eslint": "^7.30.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^7.0.1",
-    "lint-staged": "^11.0.0",
     "node-config": "^0.0.2",
     "node-gyp": "^8.1.0",
     "nodemon": "^2.0.9",
