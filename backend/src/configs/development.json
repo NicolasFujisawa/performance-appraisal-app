@@ -1,0 +1,18 @@
+{
+    "env": "development",
+    "dbConfig": {
+        "host": "localhost",
+        "user": "root",
+        "password": "password",
+        "database": "typeorm"
+    },
+    "secretKey": "secretKey",
+    "log": {
+        "format": "dev",
+        "dir": "../logs"
+    },
+    "cors": {
+        "origin": true,
+        "credentials": true
+    }
+}
