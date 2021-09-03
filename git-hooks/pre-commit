@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd front
+npx pretty-quick --staged
