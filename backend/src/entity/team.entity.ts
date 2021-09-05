@@ -2,6 +2,7 @@ import { Teacher } from '@/entity/teacher.entity';
 import { TeamMember } from '@/entity/teamMember.entity';
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Evaluation } from '@/entity/evaluation.entity';
 
 @Entity()
 export class Team {
@@ -18,4 +19,7 @@ export class Team {
 
   @OneToMany(() => TeamMember, member => member.team)
   members: TeamMember[];
+
+  @OneToMany(() => Evaluation, evaluaiton => evaluaiton.team)
+  evaluations: Evaluation[];
 }
