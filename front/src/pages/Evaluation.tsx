@@ -1,3 +1,11 @@
+import '../styles/pages/main-page.css'
+
 export default function Evaluation() {
-  return <div className="evaluation-page">Evaluation Page</div>
+  return (
+    <div id="page-component">
+      <main>
+        <div id="page-container">Evaluation page</div>
+      </main>
+    </div>
+  )
 }
