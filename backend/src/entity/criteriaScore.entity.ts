@@ -6,7 +6,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 @Entity()
 export class CriteriaScore {
   @PrimaryGeneratedColumn()
-  criteria_score_id: number;
+  criteriaScoreId: number;
 
   @Column()
   @IsNotEmpty()

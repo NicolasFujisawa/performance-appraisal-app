@@ -7,7 +7,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 @Entity()
 export class Method {
   @PrimaryGeneratedColumn()
-  method_id: number;
+  methodId: number;
 
   @Column()
   @IsNotEmpty()

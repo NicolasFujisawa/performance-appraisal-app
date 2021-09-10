@@ -7,7 +7,7 @@ import { Score } from './score.entity';
 @Entity()
 export class Student {
   @PrimaryGeneratedColumn()
-  student_id: number;
+  studentId: number;
 
   @Column()
   @IsNotEmpty()
