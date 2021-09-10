@@ -11,7 +11,7 @@ class EvaluationsController {
       const evaluationId = Number(req.params.id);
       const evaluation: Evaluation = await this.evaluationService.findById(evaluationId);
 
-      res.status(200).json({ data: evaluation, message: 'findById' });
+      res.status(200).json({ data: evaluation });
     } catch (error) {
       next(error);
     }
@@ -22,7 +22,7 @@ class EvaluationsController {
       const teamId = Number(req.params.team);
       const evaluations: Evaluation[] = await this.evaluationService.findAllByTeam(teamId);
 
-      res.status(200).json({ data: evaluations, message: 'findByTeam' });
+      res.status(200).json({ data: evaluations });
     } catch (error) {
       next(error);
     }
@@ -33,7 +33,7 @@ class EvaluationsController {
       const payload: CreateEvaluationDto = req.body;
       const createData: Evaluation = await this.evaluationService.create(payload);
 
-      res.status(201).json({ data: createData, message: 'created' });
+      res.status(201).json({ data: createData });
     } catch (error) {
       next(error);
     }
