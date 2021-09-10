@@ -15,7 +15,7 @@ class EvaluationService {
     return this._evaluationRepository;
   }
 
-  public async findAllByTeam(team: number): Promise<Evaluation[]> {
+  public async findByTeam(team: number): Promise<Evaluation[]> {
     const evaluations: Evaluation[] = await this.evaluationRepository.find({ where: { team } });
     return evaluations;
   }
