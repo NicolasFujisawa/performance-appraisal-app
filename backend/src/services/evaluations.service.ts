@@ -23,7 +23,7 @@ class EvaluationService {
   public async findById(evaluationId: number): Promise<Evaluation> {
     if (isEmpty(evaluationId)) throw new HttpException(400, 'Empty id');
 
-    const evaluation: Evaluation = await this.evaluationRepository.findOne({ where: { evaluation_id: evaluationId } });
+    const evaluation: Evaluation = await this.evaluationRepository.findOne({ where: { evaluationId } });
     if (!evaluation) throw new HttpException(404, 'Evaluation not found');
 
     return evaluation;
