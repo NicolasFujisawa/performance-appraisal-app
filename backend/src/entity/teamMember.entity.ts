@@ -5,7 +5,7 @@ import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class TeamMember {
   @PrimaryGeneratedColumn()
-  team_member_id: number;
+  teamMemberId: number;
 
   @ManyToOne(() => Student, student => student.teams)
   @JoinColumn({ name: 'student_id' })
