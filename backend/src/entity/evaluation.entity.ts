@@ -6,7 +6,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 
 @Entity()
 export class Evaluation {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'evaluation_id' })
   evaluationId: number;
 
   @Column()

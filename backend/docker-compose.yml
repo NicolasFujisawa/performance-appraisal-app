@@ -9,7 +9,7 @@ services:
     container_name: server
     image: node:14.14.0
     ports:
-      - '3000:3000'
+      - '8080:8080'
     volumes:
       - ./:/app
     depends_on:

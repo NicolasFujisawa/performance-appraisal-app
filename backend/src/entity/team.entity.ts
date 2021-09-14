@@ -6,7 +6,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 
 @Entity()
 export class Team {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'team_id' })
   teamId: number;
 
   @ManyToOne(() => Teacher, teacher => teacher.teams)
