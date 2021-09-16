@@ -9,7 +9,7 @@ class EvaluationsController {
   public getById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const evaluationId = Number(req.params.id);
-      const evaluation: Evaluation = await this.evaluationService.findById(evaluationId);
+      const evaluation: Evaluation = await this.evaluationService.findById(evaluationId, true);
 
       res.status(200).json({ data: evaluation });
     } catch (error) {

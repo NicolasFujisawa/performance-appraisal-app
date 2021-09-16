@@ -20,10 +20,12 @@ class EvaluationService {
     return evaluations;
   }
 
-  public async findById(evaluationId: number): Promise<Evaluation> {
+  public async findById(evaluationId: number, fillRelations: boolean = false): Promise<Evaluation> {
     if (isEmpty(evaluationId)) throw new HttpException(400, 'Empty id');
 
-    const evaluation: Evaluation = await this.evaluationRepository.findOne({ where: { evaluationId } });
+    const relations = fillRelations ? ['method', 'method.criterias', 'method.criterias.criteriaScores'] : [];
+
+    const evaluation: Evaluation = await this.evaluationRepository.findOne({ where: { evaluationId }, relations });
     if (!evaluation) throw new HttpException(404, 'Evaluation not found');
 
     return evaluation;
