@@ -13,3 +13,6 @@ INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values 
 
 INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (3, 2, 'Autonomo', 3);
 INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (4, 2, 'CLT', 0);
+
+INSERT INTO team_member (team_member_id, student_id, team_id) VALUES (1, 1, 1);
+INSERT INTO team_member (team_member_id, student_id, team_id) VALUES (2, 2, 1);

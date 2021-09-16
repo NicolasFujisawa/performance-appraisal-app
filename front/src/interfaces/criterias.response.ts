@@ -4,11 +4,11 @@ export interface CriteriaResponse {
   criteriaId: number
   name: string
   methodId: number
-  citeriaScores: CriteriaScoreResponse[]
+  criteriaScores: CriteriaScoreResponse[]
 }
 
 export interface CriteriaScoreResponse {
-  citeriaScoreId: number
+  criteriaScoreId: number
   name: string
   value: number
 }
