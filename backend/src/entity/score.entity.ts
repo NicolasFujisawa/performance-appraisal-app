@@ -6,7 +6,7 @@ import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Score {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'score_id' })
   scoreId: number;
 
   @ManyToOne(() => Student, student => student.evaluationsReceived)

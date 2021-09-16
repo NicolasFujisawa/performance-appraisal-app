@@ -6,7 +6,7 @@ import { Score } from './score.entity';
 
 @Entity()
 export class Student {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'student_id' })
   studentId: number;
 
   @Column()

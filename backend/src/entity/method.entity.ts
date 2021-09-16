@@ -6,7 +6,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 
 @Entity()
 export class Method {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'method_id' })
   methodId: number;
 
   @Column()

@@ -5,7 +5,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 
 @Entity()
 export class Criteria {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'criteria_id' })
   criteriaId: number;
 
   @Column()
