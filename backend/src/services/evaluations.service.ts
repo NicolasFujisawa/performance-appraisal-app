@@ -23,7 +23,9 @@ class EvaluationService {
   public async findById(evaluationId: number, fillRelations: boolean = false): Promise<Evaluation> {
     if (isEmpty(evaluationId)) throw new HttpException(400, 'Empty id');
 
-    const relations = fillRelations ? ['method', 'method.criterias', 'method.criterias.criteriaScores'] : [];
+    const relations = fillRelations
+      ? ['method', 'method.criterias', 'method.criterias.criteriaScores', 'team', 'team.members', 'team.members.student', 'team.teacher']
+      : [];
 
     const evaluation: Evaluation = await this.evaluationRepository.findOne({ where: { evaluationId }, relations });
     if (!evaluation) throw new HttpException(404, 'Evaluation not found');

@@ -1,25 +1,11 @@
 import '../styles/pages/main-page.css'
-import { getCriterias, sendEvaluationScores } from '../services/api'
+import { getEvaluation, sendEvaluationScores } from '../services/api'
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { CriteriasResponse } from '../interfaces/criterias.response'
 import { useParams } from 'react-router'
 import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
-
-interface Evaluation {
-  id: number
-  team_name: string
-  person: Array<string>
-}
-
-interface Model {
-  model_name: string
-  criteria: Array<{
-    id: number
-    item: Array<string>
-    selected_item: string
-  }>
-}
-
+import { Evaluation as IEvaluation } from '../interfaces/evaluation'
+import { Student, TeamMember } from '../interfaces/team'
 interface FormValues {
   criterias: {
     [key: string]: number
@@ -27,26 +13,25 @@ interface FormValues {
 }
 
 export default function Evaluation() {
-  const [evaluation, setEvalaution] = useState<Evaluation>({
-    id: 1,
-    team_name: 'Leo',
-    person: ['Leo'],
-  })
+  const [evaluation, setEvaluation] = useState<IEvaluation>({} as any)
 
   const params = useParams()
 
   const [criterias, setCriterias] = useState<CriteriasResponse>()
   const [formValues, setFormValues] = useState<FormValues>({ criterias: {} })
+  const [students, setStudents] = useState<TeamMember[]>([])
 
-  const loadCriterias = async () => {
-    const criteriasResponse = await getCriterias(1)
-    setCriterias(criteriasResponse)
+  const loadEvaluation = async () => {
+    const {
+      data: { data },
+    } = await getEvaluation(1)
+    setEvaluation(data)
+    setCriterias(data.method?.criterias)
+    setStudents(data.team?.members)
   }
 
   useEffect(() => {
-    setEvalaution({ id: 1, team_name: 'Nicolas', person: ['Nicolas'] })
-
-    loadCriterias()
+    loadEvaluation()
   }, [params])
 
   function buildRequestPayload(): SendEvaluationScoresPayload {
@@ -55,7 +40,7 @@ export default function Evaluation() {
       evaluatorStudent: 2,
       evaluatorTeacher: 1,
       criteriaScore: value,
-      evaluation: evaluation.id,
+      evaluation: evaluation.evaluationId,
       criteria: parseInt(key),
     }))
   }
@@ -70,7 +55,7 @@ export default function Evaluation() {
   function handleCriteriaScoreChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target
     const newFormValues = { ...formValues }
-    const criteriaId = name.split('-')[1]
+    const [, criteriaId] = name.split('-')
     newFormValues.criterias[criteriaId] = parseInt(value)
     setFormValues(newFormValues)
   }
@@ -80,29 +65,38 @@ export default function Evaluation() {
       <main>
         <div id="page-container">
           <h1>Avaliar</h1>
-          <h3>{evaluation.team_name}</h3>
+          <h3>{evaluation.team?.name}</h3>
           <hr />
-          <form onSubmit={handleSubmit}>
-            {criterias?.map((criteria) => (
-              <div key={`criteria-${criteria.criteriaId}`}>
-                <h1>{criteria.name}</h1>
-                <div>
-                  {criteria.citeriaScores.map((criteriaScore) => (
-                    <div key={`criteria-score-${criteriaScore.citeriaScoreId}`}>
-                      <input
-                        type="radio"
-                        name={`criteria-${criteria.criteriaId}`}
-                        value={criteriaScore.citeriaScoreId}
-                        onChange={handleCriteriaScoreChange}
-                      />
-                      <span>{criteriaScore.name}</span>
-                    </div>
-                  ))}
+          {students?.map((teamMember) => (
+            <form
+              onSubmit={handleSubmit}
+              key={`student-evaluation-${teamMember?.student.studentId}`}
+              style={{ marginBottom: '30px' }}
+            >
+              <h2>{teamMember.student.name}</h2>
+              {criterias?.map((criteria) => (
+                <div key={`criteria-${criteria.criteriaId}`}>
+                  <h3>{criteria.name}</h3>
+                  <div>
+                    {criteria.criteriaScores?.map((criteriaScore) => (
+                      <div
+                        key={`criteria-score-${criteriaScore.criteriaScoreId}`}
+                      >
+                        <input
+                          type="radio"
+                          name={`criteria-${criteria.criteriaId}`}
+                          value={criteriaScore.criteriaScoreId}
+                          onChange={handleCriteriaScoreChange}
+                        />
+                        <span>{criteriaScore.name}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-            <input type="submit"></input>
-          </form>
+              ))}
+              <input type="submit"></input>
+            </form>
+          ))}
         </div>
       </main>
     </div>
