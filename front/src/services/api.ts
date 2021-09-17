@@ -14,4 +14,7 @@ export const sendEvaluationScores = async (
 export const getEvaluation = async (evaluationId: number) =>
   instance.get<GetEvaluationResponse>(`/evaluations/${evaluationId}`)
 
+export const getEvaluatedStudentScores = async (evaluatedStudentId: number, evaluationId: number) =>
+  instance.get<GetEvaluationResponse>(`/scores/evaluation/${evaluationId}/evaluatedStudent/${evaluatedStudentId}`)
+
 export default instance

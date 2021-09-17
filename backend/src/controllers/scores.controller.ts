@@ -6,10 +6,11 @@ import { NextFunction, Request, Response } from 'express';
 class ScoreController {
   public service = new ScoreService();
 
-  public findByEvaluation = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public findByEvaluationAndEvaluatedStudent = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const evaluationId = Number(req.params.evaluation);
-      const scores: Score[] = await this.service.findByEvaluation(evaluationId);
+      const evaluatedStudentId = Number(req.params.evaluatedStudent);
+      const scores: Score[] = await this.service.findByEvaluationAndEvaluatedStudent(evaluationId, evaluatedStudentId);
 
       res.status(200).json({ data: scores });
     } catch (error) {
