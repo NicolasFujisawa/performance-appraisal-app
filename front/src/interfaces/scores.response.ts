@@ -1,8 +1,8 @@
 import { CriteriaScoreResponse } from './criterias.response';
 
-export type ScoresResponses = ScoresResponse[];
+export type ScoresResponse = ScoreResponse[];
 
-export type ScoresResponse = {
+export type ScoreResponse = {
     scoreId: number,
     evaluatedStudent: {
         studentId: number,
