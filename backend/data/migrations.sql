@@ -16,3 +16,9 @@ INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values 
 
 INSERT INTO team_member (team_member_id, student_id, team_id) VALUES (1, 1, 1);
 INSERT INTO team_member (team_member_id, student_id, team_id) VALUES (2, 2, 1);
+
+insert into evaluation ("start", "end", "isLastEvaluation", "method_id", "teamTeamId") values ('2021-09-17', '2021-10-17', false, 1, 1);
+
+insert into score (evaluated_student_id, evaluator_student_id, criteria_score_id, evaluation_id) values (1, 2, 1, 1);
+insert into score (evaluated_student_id, evaluator_student_id, criteria_score_id, evaluation_id) values (1, 2, 2, 1);
+insert into score (evaluated_student_id, evaluator_student_id, criteria_score_id, evaluation_id) values (2, 1, 2, 1);

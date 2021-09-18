@@ -1,6 +1,7 @@
 import '../styles/pages/main-page.css'
 import { Evaluation as IEvaluation } from '../interfaces/evaluation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router'
 import { getEvaluation } from '../services/api'
 import { CriteriasResponse } from '../interfaces/criterias.response'
 import { Student } from '../interfaces/team'
@@ -8,7 +9,18 @@ import { Student } from '../interfaces/team'
 export default function Results() {
   const [evaluation, setEvaluation] = useState<IEvaluation>({} as any)
   const [students, setStudents] = useState<Student>({} as any)
+  const params = useParams()
 
+  const loadEvaluation = async () => {
+    const {
+      data: { data },
+    } = await getEvaluation(1)
+    setEvaluation(data)
+  }
+
+  useEffect(() => {
+    loadEvaluation()
+  }, [params])
   return (
     <div id="page-container">
       <h1>Avaliação</h1>
