@@ -133,7 +133,7 @@ export default function Evaluation() {
               </div>
             ))}
             <button className="confirm-button" type="submit">
-              Proximo
+              Próximo
             </button>
           </form>
         </div>
