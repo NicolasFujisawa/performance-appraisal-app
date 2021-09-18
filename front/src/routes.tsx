@@ -8,6 +8,7 @@ function Routes() {
       <Switch>
         <Route path="/evaluation" component={Evaluation} />
         <Route path="/results" component={Results} />
+        <Route path="/evaluation/:id" component={Evaluation} />
       </Switch>
     </BrowserRouter>
   )
