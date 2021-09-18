@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import { GetEvaluationResponse } from '../interfaces/get.evaluation.response'
+import { ScoresResponse } from '../interfaces/scores.response'
 import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
 
 const instance = axios.create({
@@ -13,5 +14,8 @@ export const sendEvaluationScores = async (
 
 export const getEvaluation = async (evaluationId: number) =>
   instance.get<GetEvaluationResponse>(`/evaluations/${evaluationId}`)
+
+export const getEvaluatedStudentScores = async (evaluatedStudentId: number, evaluationId: number) =>
+  instance.get<ScoresResponse>(`/scores/evaluation/${evaluationId}/evaluatedStudent/${evaluatedStudentId}`)
 
 export default instance
