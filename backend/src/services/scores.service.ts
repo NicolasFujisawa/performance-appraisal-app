@@ -15,26 +15,26 @@ class ScoreService {
     return this._scoreRepository;
   }
 
-  public findByEvaluation = async (evaluationId: number): Promise<Score[]> => {
+  public findByEvaluationAndEvaluatedStudent = async (evaluationId: number, evaluatedStudentId: number): Promise<Score[]> => {
     if (isEmpty(evaluationId)) throw new HttpException(400, 'Empty id');
 
     const scores: Score[] = await this.scoreRepository.find({
-      where: { evaluation: evaluationId },
+      where: { evaluation: evaluationId, evaluatedStudent: evaluatedStudentId },
       relations: ['evaluatedStudent', 'evaluatorStudent', 'evaluatorTeacher', 'criteriaScore'],
     });
 
     return scores;
   };
 
-  private createOne = async (score: CreateScoreDto): Promise<Score> => {
-    const createScore: Score = await this.scoreRepository.save({ ...score });
-    return createScore;
-  };
-
   public createBulk = async (payload: CreateScoreDto[]): Promise<Score[]> => {
     const createdScores: Score[] = await Promise.all(payload.map(this.createOne));
 
     return createdScores;
+  };
+
+  private createOne = async (score: CreateScoreDto): Promise<Score> => {
+    const createScore: Score = await this.scoreRepository.save({ ...score });
+    return createScore;
   };
 }
 

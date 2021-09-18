@@ -12,7 +12,10 @@ class ScoreRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}/evaluation/:evaluation(\\d+)`, this.controller.findByEvaluation);
+    this.router.get(
+      `${this.path}/evaluation/:evaluation(\\d+)/evaluatedStudent/:evaluatedStudent(\\d+)`,
+      this.controller.findByEvaluationAndEvaluatedStudent,
+    );
     this.router.post(`${this.path}`, this.controller.create);
   }
 }
