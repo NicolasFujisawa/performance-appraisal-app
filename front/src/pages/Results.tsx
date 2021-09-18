@@ -8,7 +8,9 @@ import { getEvaluation, getEvaluatedStudentScores } from '../services/api'
 export default function Results() {
   const [evaluation, setEvaluation] = useState<IEvaluation>({} as any)
   const [scores, setScores] = useState<IScoresResponse>({} as any)
+
   const params = useParams()
+
   const loadScores = async () => {
     const {
       data: { data },
@@ -28,6 +30,7 @@ export default function Results() {
     loadEvaluation()
     loadScores()
   }, [params])
+
   return (
     <div id="page-container">
       <h1>Avaliação</h1>
@@ -36,8 +39,8 @@ export default function Results() {
       <br />
       <h1>Resultados</h1>
       <h5>Student A</h5>
-      {scores?.map((score) => (
-        <h5>{`${score.criteriaScore.name} : ${score.criteriaScore.value}`}</h5>
+      {Object.entries(scores).map(([key, value]) => (
+        <h5>{`${value.criteriaScore.name} : ${value.criteriaScore.value}`}</h5>
       ))}
     </div>
   )
