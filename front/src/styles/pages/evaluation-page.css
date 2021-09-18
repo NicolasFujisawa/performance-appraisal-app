@@ -1,0 +1,65 @@
+legend {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+label {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+hr {
+  margin: 10px 0px;
+}
+
+.student-name {
+  margin: 25px 0px 15px;
+}
+
+form.evaluation-form .criteria-field {
+  margin-bottom: 20px;
+}
+
+form.evaluation-form .criteria-scores {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+form.evaluation-form .criteria-score-radio {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+form.evaluation-form input[type='radio'],
+form.evaluation-form label {
+  cursor: pointer;
+}
+
+form.evaluation-form button {
+  width: 100%;
+  height: 56px;
+  border: 0;
+  background: #58daec;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}

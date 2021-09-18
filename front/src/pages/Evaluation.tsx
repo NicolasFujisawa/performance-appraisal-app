@@ -1,33 +1,45 @@
 import '../styles/pages/main-page.css'
+import '../styles/pages/evaluation-page.css'
 import { getEvaluation, sendEvaluationScores } from '../services/api'
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { CriteriasResponse } from '../interfaces/criterias.response'
 import { useParams } from 'react-router'
 import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
 import { Evaluation as IEvaluation } from '../interfaces/evaluation'
-import { Student, TeamMember } from '../interfaces/team'
+import { TeamMember } from '../interfaces/team'
+
 interface FormValues {
+  studentId: number
   criterias: {
     [key: string]: number
   }
 }
 
+interface EvaluationParams {
+  id: string
+}
+
 export default function Evaluation() {
   const [evaluation, setEvaluation] = useState<IEvaluation>({} as any)
 
-  const params = useParams()
+  const params = useParams<EvaluationParams>()
 
   const [criterias, setCriterias] = useState<CriteriasResponse>()
-  const [formValues, setFormValues] = useState<FormValues>({ criterias: {} })
-  const [students, setStudents] = useState<TeamMember[]>([])
+  const [formValues, setFormValues] = useState<FormValues>({
+    studentId: 0,
+    criterias: {},
+  })
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
+  const [index, setIndex] = useState(0)
+  const currentStudent = teamMembers[index]?.student
 
   const loadEvaluation = async () => {
     const {
       data: { data },
-    } = await getEvaluation(1)
+    } = await getEvaluation(parseInt(params.id))
     setEvaluation(data)
     setCriterias(data.method?.criterias)
-    setStudents(data.team?.members)
+    setTeamMembers(data.team?.members)
   }
 
   useEffect(() => {
@@ -36,7 +48,7 @@ export default function Evaluation() {
 
   function buildRequestPayload(): SendEvaluationScoresPayload {
     return Object.entries(formValues.criterias).map(([key, value]) => ({
-      evaluatedStudent: 1,
+      evaluatedStudent: formValues.studentId,
       evaluatorStudent: 2,
       evaluatorTeacher: 1,
       criteriaScore: value,
@@ -49,6 +61,8 @@ export default function Evaluation() {
     event.preventDefault()
     const payload = buildRequestPayload()
     const result = await sendEvaluationScores(payload)
+    handleIndex()
+    setFormValues({ studentId: 0, criterias: {} })
     console.log(payload)
   }
 
@@ -57,46 +71,71 @@ export default function Evaluation() {
     const newFormValues = { ...formValues }
     const [, criteriaId] = name.split('-')
     newFormValues.criterias[criteriaId] = parseInt(value)
+    newFormValues.studentId = currentStudent.studentId
     setFormValues(newFormValues)
+  }
+
+  function handleIndex() {
+    const max = teamMembers.length - 1
+    if (max > index) setIndex(index + 1)
+    if (max <= index)
+      alert(`Avaliação da equipe ${evaluation.team?.name} completa!`)
+  }
+
+  if (!evaluation) {
+    return <p>Carregando..</p>
   }
 
   return (
     <div id="page-component">
       <main>
         <div id="page-container">
-          <h1>Avaliar</h1>
-          <h3>{evaluation.team?.name}</h3>
+          <div className="page-team-info">
+            <legend>Avaliar</legend>
+            <h2>{evaluation.team?.name}</h2>
+          </div>
           <hr />
-          {students?.map((teamMember) => (
-            <form
-              onSubmit={handleSubmit}
-              key={`student-evaluation-${teamMember?.student.studentId}`}
-              style={{ marginBottom: '30px' }}
-            >
-              <h2>{teamMember.student.name}</h2>
-              {criterias?.map((criteria) => (
-                <div key={`criteria-${criteria.criteriaId}`}>
-                  <h3>{criteria.name}</h3>
-                  <div>
-                    {criteria.criteriaScores?.map((criteriaScore) => (
-                      <div
-                        key={`criteria-score-${criteriaScore.criteriaScoreId}`}
+          <form
+            className="evaluation-form"
+            onSubmit={handleSubmit}
+            key={`student-evaluation-${currentStudent?.studentId}`}
+          >
+            <div className="student-name">
+              <h3>{currentStudent?.name}</h3>
+            </div>
+            {criterias?.map((criteria) => (
+              <div
+                className="criteria-field"
+                key={`criteria-${criteria.criteriaId}`}
+              >
+                <h3>{criteria.name}</h3>
+                <div className="criteria-scores">
+                  {criteria.criteriaScores?.map((criteriaScore) => (
+                    <div
+                      className="criteria-score-radio"
+                      key={`criteria-score-${criteriaScore.criteriaScoreId}`}
+                    >
+                      <input
+                        id={`${criteria.criteriaId}-${criteriaScore.criteriaScoreId}`}
+                        type="radio"
+                        name={`criteria-${criteria.criteriaId}-${currentStudent?.studentId}`}
+                        value={criteriaScore.criteriaScoreId}
+                        onChange={handleCriteriaScoreChange}
+                      />
+                      <label
+                        htmlFor={`${criteria.criteriaId}-${criteriaScore.criteriaScoreId}`}
                       >
-                        <input
-                          type="radio"
-                          name={`criteria-${criteria.criteriaId}`}
-                          value={criteriaScore.criteriaScoreId}
-                          onChange={handleCriteriaScoreChange}
-                        />
-                        <span>{criteriaScore.name}</span>
-                      </div>
-                    ))}
-                  </div>
+                        {criteriaScore.name}
+                      </label>
+                    </div>
+                  ))}
                 </div>
-              ))}
-              <input type="submit"></input>
-            </form>
-          ))}
+              </div>
+            ))}
+            <button className="confirm-button" type="submit">
+              Proximo
+            </button>
+          </form>
         </div>
       </main>
     </div>
