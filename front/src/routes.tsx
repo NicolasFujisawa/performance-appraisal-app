@@ -5,7 +5,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/evaluation" component={Evaluation} />
+        <Route path="/evaluation/:id" component={Evaluation} />
       </Switch>
     </BrowserRouter>
   )
