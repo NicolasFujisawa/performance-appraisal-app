@@ -11,4 +11,8 @@ export interface CriteriaScoreResponse {
   criteriaScoreId: number
   name: string
   value: number
+  criteria: {
+    criteriaId: number
+    name: string
+  }
 }

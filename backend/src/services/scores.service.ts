@@ -20,7 +20,7 @@ class ScoreService {
 
     const scores: Score[] = await this.scoreRepository.find({
       where: { evaluation: evaluationId, evaluatedStudent: evaluatedStudentId },
-      relations: ['evaluatedStudent', 'evaluatorStudent', 'evaluatorTeacher', 'criteriaScore'],
+      relations: ['evaluatedStudent', 'evaluatorStudent', 'evaluatorTeacher', 'criteriaScore', 'criteriaScore.criteria'],
     });
 
     return scores;
