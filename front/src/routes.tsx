@@ -6,7 +6,10 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/results" component={Results} />
+        <Route
+          path="/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results"
+          component={Results}
+        />
         <Route path="/evaluation/:id" component={Evaluation} />
       </Switch>
     </BrowserRouter>
