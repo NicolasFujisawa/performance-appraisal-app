@@ -40,7 +40,7 @@ export default function Results() {
       <h1>Resultados</h1>
       <h5>Student A</h5>
       {Object.entries(scores).map(([key, value]) => (
-        <h5>{`${value.criteriaScore.name} : ${value.criteriaScore.value}`}</h5>
+        <h5>{`${value.criteriaScore.criteria.name} : ${value.criteriaScore.name}`}</h5>
       ))}
     </div>
   )
