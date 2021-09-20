@@ -7,6 +7,7 @@ import { useParams } from 'react-router'
 import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
 import { Evaluation as IEvaluation } from '../interfaces/evaluation'
 import { TeamMember } from '../interfaces/team'
+import { useQuery } from '../commons/utils/useQuery'
 
 interface FormValues {
   studentId: number
@@ -23,6 +24,7 @@ export default function Evaluation() {
   const [evaluation, setEvaluation] = useState<IEvaluation>({} as any)
 
   const params = useParams<EvaluationParams>()
+  const query = useQuery()
 
   const [criterias, setCriterias] = useState<CriteriasResponse>()
   const [formValues, setFormValues] = useState<FormValues>({
@@ -49,8 +51,8 @@ export default function Evaluation() {
   function buildRequestPayload(): SendEvaluationScoresPayload {
     return Object.entries(formValues.criterias).map(([key, value]) => ({
       evaluatedStudent: formValues.studentId,
-      evaluatorStudent: 2,
-      evaluatorTeacher: 1,
+      evaluatorStudent: parseInt(query.get('student') + '1'),
+      evaluatorTeacher: parseInt(query.get('teacher') + '1'),
       criteriaScore: value,
       evaluation: evaluation.evaluationId,
       criteria: parseInt(key),
