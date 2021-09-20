@@ -71,7 +71,7 @@ export default function Results() {
       <main>
         <div id="page-container">
           <h1>Avaliação</h1>
-          <h3>{`${finalDate?.toLocaleDateString('pt-BR')} - Finished`}</h3>
+          <h3>{`${finalDate?.toLocaleDateString('pt-BR')} - Finalizada`}</h3>
           <h3>{evaluation.team?.name}</h3>
           <br />
           <h1>Resultados</h1>
