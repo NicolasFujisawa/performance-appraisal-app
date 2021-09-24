@@ -51,8 +51,8 @@ export default function Evaluation() {
   function buildRequestPayload(): SendEvaluationScoresPayload {
     return Object.entries(formValues.criterias).map(([key, value]) => ({
       evaluatedStudent: formValues.studentId,
-      evaluatorStudent: parseInt(query.get('student')) || 1,
-      evaluatorTeacher: parseInt(query.get('student')) || 1,
+      evaluatorStudent: parseInt(query.get('student') || '1'),
+      evaluatorTeacher: parseInt(query.get('teacher') || '1'),
       criteriaScore: value,
       evaluation: evaluation.evaluationId,
       criteria: parseInt(key),
