@@ -16,3 +16,25 @@ INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values 
 
 INSERT INTO team_member (team_member_id, student_id, team_id) VALUES (1, 1, 1);
 INSERT INTO team_member (team_member_id, student_id, team_id) VALUES (2, 2, 1);
+
+
+INSERT INTO method (method_id, name, teacher_id) values (2, 'Pacer', 1);
+
+INSERT INTO criteria (criteria_id, name, method_id) values (3, 'Proatividade', 2);
+INSERT INTO criteria (criteria_id, name, method_id) values (4, 'Colaboração', 2);
+INSERT INTO criteria (criteria_id, name, method_id) values (5, 'Entrega de Resultados', 2);
+
+INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (5, 3, 'Reativo', 0);
+INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (6, 3, 'Ativo', 1);
+INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (7, 3, 'Proativo', 2);
+
+INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (8, 4, 'Ausente', 0);
+INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (9, 4, 'Coordenado', 1);
+INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (10, 4, 'Colaborativo', 2);
+
+INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (11, 5, 'Sem entregas', 0);
+INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (12, 5, 'Entregas dúvidosas', 1);
+INSERT INTO criteria_score (criteria_score_id, criteria_id, name, value) values (13, 5, 'Entregas Confiaveis', 2);
+
+
+

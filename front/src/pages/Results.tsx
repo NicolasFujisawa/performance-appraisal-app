@@ -26,8 +26,8 @@ export default function Results() {
     const {
       data: { data },
     } = await getEvaluatedStudentScores(
-      parseInt(params.evaluation_id),
-      parseInt(params.evaluated_id)
+      parseInt(params.evaluated_id),
+      parseInt(params.evaluation_id)
     )
     setScores(
       data.sort((a: IScoreResponse, b: IScoreResponse) =>
