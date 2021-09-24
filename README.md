@@ -6,6 +6,18 @@ Um projeto de avaliação de performance utilizando React com Typescrpt, onde é
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=flat&logo=postgresql&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=falt&logo=express&logoColor=%2361DAFB) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)
 
+### Como subir a aplicação
+
+Para subir basta executar
+
+> docker-compose up -d
+
+Nas pastas 'front' e 'backend'
+
+Client: http://localhost:3000/
+
+Server: http://localhost:8080/
+
 ### Time
 
 - [Jason Carneiro](https://www.linkedin.com/in/jason-carneiro/)
@@ -20,3 +32,22 @@ Um projeto de avaliação de performance utilizando React com Typescrpt, onde é
 - Modelagem no PostgreSQL
 - API's das entidades Avaliação e Relatório
 - Funcionalidade de Avaliar e gerar relatórios
+
+### Sprint 2
+
+- API's CRUD para avaliação, método e critérios
+- Telas de CRUD para as novas funções
+- Criação do sidebar e navegação das telas
+
+### Spring 3
+
+- Auth0 com typeorm
+- Tela de Login e gerenciamento de usuários
+- Permissões para professores e alunos
+- Ajustes na tela de relatórios
+
+### Sprint 4
+
+- Pequenas correções nas telas
+- Inclusão de um gráfico melhorado na tela de resultados
+- Usabilidade do usuário
