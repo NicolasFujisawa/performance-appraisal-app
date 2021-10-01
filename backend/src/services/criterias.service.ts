@@ -5,7 +5,7 @@ class CriteriasService {
   public criteria = Criteria;
   private _criteriaRepository: Repository<Criteria>;
 
-  get evaluationRepository() {
+  get criteriaRepository() {
     if (this._criteriaRepository) return this._criteriaRepository;
 
     this._criteriaRepository = getRepository(this.criteria);
@@ -13,7 +13,7 @@ class CriteriasService {
   }
 
   public async findAll() {
-    return this.evaluationRepository.find();
+    return this.criteriaRepository.find();
   }
 }
 
