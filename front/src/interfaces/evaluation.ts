@@ -3,6 +3,7 @@ import { Team } from './team'
 
 export interface Evaluation {
   evaluationId: number
+  name: string
   start: string
   end: string
   isLastEvaluation: boolean

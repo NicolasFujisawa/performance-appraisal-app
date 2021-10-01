@@ -94,7 +94,9 @@ export default function Evaluation() {
         <div id="page-container">
           <div className="page-team-info">
             <legend>Avaliar</legend>
-            <h2>{evaluation.team?.name}</h2>
+            <h2>
+              {evaluation.team?.name} - {evaluation.name}
+            </h2>
           </div>
           <hr />
           <form
