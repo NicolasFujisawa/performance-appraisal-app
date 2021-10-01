@@ -14,7 +14,7 @@ class MethodsService {
   }
 
   public async create(payload: CreateMethodDto) {
-    return this.methodRepository.save(payload);
+    return this.methodRepository.save({ ...payload });
   }
 }
 
