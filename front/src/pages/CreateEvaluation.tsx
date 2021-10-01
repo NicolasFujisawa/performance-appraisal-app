@@ -20,7 +20,7 @@ export default function Evaluation() {
           <label>Não</label>
         </div>
         <button className="confirm-button" type="submit">
-          Próximo
+          Concluído
         </button>
       </form>
     </div>
