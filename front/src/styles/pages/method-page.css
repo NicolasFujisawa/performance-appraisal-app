@@ -1,0 +1,50 @@
+.confirm-button {
+  width: 100%;
+  height: 56px;
+  border: 0;
+  background: #3CDC8C;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 800;
+  font-family: 'Roboto';
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.input {
+  width: 100%;
+  height: 56px;
+  color: #ccc;
+  font-weight: 800;
+  font-family: 'Roboto';
+  font-style: normal;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  transition: background-color 0.2s;
+
+  background: #FFFFFF;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.drop-down {
+  width: 100%;
+  height: 25px;
+  border: 2px solid #ccc;
+  background: #fff;
+  border-radius: 5px;
+  font-weight: 800;
+  font-family: 'Roboto';
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
