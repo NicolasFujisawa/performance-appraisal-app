@@ -3,7 +3,7 @@ import { FiTrash2 } from 'react-icons/fi'
 
 export default function DeleteButton(props: { action: any; id: number }) {
   const [level, setLevel] = useState(0)
-  const [color, setColor] = useState('#e7dddd')
+  const [color, setColor] = useState('#413c62')
   const { action, id } = props
 
   function handleClick() {
@@ -14,7 +14,7 @@ export default function DeleteButton(props: { action: any; id: number }) {
     if (level === 1) {
       action(id)
       setLevel(0)
-      setColor('#e7dddd')
+      setColor('#413c62')
     }
   }
 

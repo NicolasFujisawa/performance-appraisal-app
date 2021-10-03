@@ -1,4 +1,5 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import CreateCriteria from './pages/CreateCriteria'
 import Evaluation from './pages/Evaluation'
 import Results from './pages/Results'
 
@@ -11,6 +12,7 @@ function Routes() {
           component={Results}
         />
         <Route path="/evaluation/:id" component={Evaluation} />
+        <Route path="/criteria/new" component={CreateCriteria} />
       </Switch>
     </BrowserRouter>
   )
