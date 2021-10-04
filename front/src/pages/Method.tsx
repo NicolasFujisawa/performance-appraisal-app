@@ -1,39 +1,54 @@
 import { useState } from 'react'
+import { CriteriaResponse } from '../interfaces/criterias.response'
 import '../styles/pages/main-page.css'
 import '../styles/pages/method-page.css'
 
+
+const mockCriterias: CriteriaResponse[] = [
+  {} as any,
+  {
+    criteriaId: 1,
+    name: 'Criteria 1',
+    criteriaScores: [],
+  },
+  {
+    criteriaId: 2,
+    name: 'Criteria 2',
+    criteriaScores: [],
+  },
+  {
+    criteriaId: 3,
+    name: 'Criteria 3',
+    criteriaScores: [],
+  },
+];
+
 export default function Method() {
-  const [placeholders, setPlaceholders] = useState<Array<string>>([
-    '',
-    'banana',
-    'apple',
-    'orange',
-    'pear',
-    'grape',
-  ])
-  const [chosenPlaceholders, setChosenPlaceholders] = useState<Array<string>>(
+  const [criterias, setCriterias] = useState<Array<CriteriaResponse>>(mockCriterias)
+  const [chosenCriterias, setChosenCriterias] = useState<Array<CriteriaResponse>>(
     []
   )
 
   const handleChange = (e: any) => {
     const { value } = e.target
 
-    const newPlaceholders = placeholders.filter(
-      (placeholder) => placeholder !== value
+    const [newChosenCriteria] = criterias.filter(criteria => criteria.name === value)
+    const newCriterias = criterias.filter(
+      (criteria) => criteria.name !== value
     )
 
-    setPlaceholders(newPlaceholders)
-    setChosenPlaceholders([...chosenPlaceholders, value])
+    setCriterias(newCriterias)
+    setChosenCriterias([...chosenCriterias, newChosenCriteria])
   }
 
-  const handleRemove = (placeholder: string) => {
-    const newPlaceholders = [...placeholders, placeholder]
-    const newChosenPlaceholders = chosenPlaceholders.filter(
-      (chosenPlaceholder) => chosenPlaceholder !== placeholder
+  const handleRemove = (criteria: CriteriaResponse) => {
+    const newCriterias = [...criterias, criteria]
+    const newChosenCriterias = chosenCriterias.filter(
+      (chosenCriteria) => chosenCriteria !== criteria
     )
 
-    setPlaceholders(newPlaceholders)
-    setChosenPlaceholders(newChosenPlaceholders)
+    setCriterias(newCriterias)
+    setChosenCriterias(newChosenCriterias)
   }
 
 
@@ -45,27 +60,27 @@ export default function Method() {
           <br />
           <form>
             <label>
-              Nome:
+              Nome
               <br />
               <input className="drop-down" type="text" name="name" />
             </label>
             <br />
             <label>
-              Critérios:
+              Critérios
               <br />
               <select className="drop-down" value={''} onChange={handleChange}>
-                {placeholders.map((placeholder: string) => (
-                  <option key={placeholder} value={placeholder}>
-                    {placeholder}
+                {criterias.map((criteria: CriteriaResponse) => (
+                  <option key={criteria.criteriaId} value={criteria.name}>
+                    {criteria.name}
                   </option>
                 ))}
               </select>
             </label>
-            {chosenPlaceholders.map((placeholder: string) => (
-              <div key={placeholder}>
+            {chosenCriterias.map((criteria: CriteriaResponse) => (
+              <div key={criteria.criteriaId}>
                 <label>
-                  {placeholder}
-                  <button onClick={() => handleRemove(placeholder)}>x</button>
+                  {criteria.name}
+                  <button onClick={() => handleRemove(criteria)}>x</button>
                 </label>
               </div>
             ))}
