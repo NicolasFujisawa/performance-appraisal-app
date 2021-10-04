@@ -12,7 +12,7 @@ import '../styles/pages/create-criteria-page.css'
 export default function CreateCriteria() {
   const [name, setName] = useState('')
   const [criteriaScore, setCriteriaScore] = useState('')
-  const [value, setValue] = useState(0)
+  const [criteriaScoreIndexer, setCriteriaScoreIndexer] = useState(0)
   const [criteria, setCriteria] = useState<CriteriaPayload>(
     {} as CriteriaPayload
   )
@@ -28,13 +28,16 @@ export default function CreateCriteria() {
   function clearData() {
     setName('')
     setCriteriaScore('')
-    setValue(0)
+    setCriteriaScoreIndexer(0)
     setCriteria({} as CriteriaPayload)
   }
 
   function handleCriteriaScore() {
     const criteriaClone = criteria
-    const newCriteriaScore = { name: criteriaScore, value: value }
+    const newCriteriaScore = {
+      name: criteriaScore,
+      value: criteriaScoreIndexer,
+    }
 
     if (criteria.criteriaScores === undefined) {
       criteria.criteriaScores = [] as CriteriaScorePayload[]
@@ -43,7 +46,7 @@ export default function CreateCriteria() {
     criteriaClone.criteriaScores.push(newCriteriaScore)
     setCriteria(criteriaClone)
     setCriteriaScore('')
-    setValue(value + 1)
+    setCriteriaScoreIndexer(criteriaScoreIndexer + 1)
   }
 
   function handleDelete(id: number) {
@@ -54,7 +57,7 @@ export default function CreateCriteria() {
     )
     criteriaClone.criteriaScores = sortCriteriasValue(criteriaScoresFiltered)
     setCriteria(criteriaClone)
-    setValue(value - 1)
+    setCriteriaScoreIndexer(criteriaScoreIndexer - 1)
   }
 
   function sortCriteriasValue(
