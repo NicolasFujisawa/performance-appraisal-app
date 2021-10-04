@@ -48,7 +48,6 @@ export default function Evaluation() {
           <button className="create-method" type="submit">
             Confirmar
           </button>
-          .
         </fieldset>
       </form>
     </div>
