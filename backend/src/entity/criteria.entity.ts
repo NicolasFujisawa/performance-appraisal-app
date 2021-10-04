@@ -15,6 +15,6 @@ export class Criteria {
   @ManyToMany(() => Method)
   method: Method[];
 
-  @OneToMany(() => CriteriaScore, criteriaScore => criteriaScore.criteria)
+  @OneToMany(() => CriteriaScore, criteriaScore => criteriaScore.criteria, { cascade: true })
   criteriaScores: CriteriaScore[];
 }

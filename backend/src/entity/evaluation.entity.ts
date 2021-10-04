@@ -10,6 +10,9 @@ export class Evaluation {
   evaluationId: number;
 
   @Column()
+  name: string;
+
+  @Column()
   @IsNotEmpty()
   start: Date;
 
