@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { CriteriaPayload } from '../interfaces/criterias.scores.payload'
 
 import { GetEvaluationResponse } from '../interfaces/get.evaluation.response'
 import { GetScoresResponse } from '../interfaces/get.scores.response'
@@ -22,5 +23,7 @@ export const getEvaluatedStudentScores = async (
   instance.get<GetScoresResponse>(
     `/scores/evaluation/${evaluationId}/evaluatedStudent/${evaluatedStudentId}`
   )
+
+export const sendCriteria = async (payload: CriteriaPayload) => instance.get('')
 
 export default instance
