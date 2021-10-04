@@ -13,6 +13,7 @@ class CriteriasRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/`, this.controller.findAll);
+    this.router.post(`${this.path}/`, this.controller.create);
   }
 }
 
