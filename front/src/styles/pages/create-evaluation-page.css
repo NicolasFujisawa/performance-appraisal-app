@@ -1,0 +1,71 @@
+form#page-container fieldset {
+  border: 0;
+}
+
+form#page-container fieldset legend {
+  width: 100%;
+
+  border-bottom: 1px solid #d3e2e5;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+}
+
+form#page-container .input-block + .input-block {
+  margin-top: 24px;
+}
+
+form#page-container .input-block label {
+  display: flex;
+  margin-bottom: 8px;
+  line-height: 24px;
+}
+
+form#page-container .input-block input[type='text'] {
+  width: 100%;
+  border: 1px solid #5d696b;
+  border-radius: 8px;
+  outline: none;
+  color: #413c62;
+  height: 52px;
+  padding: 0 16px;
+}
+
+form#page-container .input-block input[type='radio'] + label {
+  display: inline;
+}
+form#page-container .input-block input[type='radio'] {
+  border: 1px solid #5d696b;
+  border-radius: 8px;
+  outline: none;
+  color: #413c62;
+}
+
+form#page-container .input-block select {
+  width: 100%;
+  border: 1px solid #5d696b;
+  border-radius: 8px;
+  outline: none;
+  color: #413c62;
+  height: 52px;
+  padding: 0 16px 0 16px;
+}
+
+form#page-container .create-method {
+  margin-top: 36px;
+  width: 100%;
+  height: 56px;
+  border: 0;
+  background: #3cdc8c;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: filter 0.2s;
+}
+form#page-container .create-method:hover {
+  filter: brightness(117%);
+}
