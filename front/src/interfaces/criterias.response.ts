@@ -1,9 +1,12 @@
 export type CriteriasResponse = CriteriaResponse[]
 
+export type GetCriteriasResponse = {
+  data: CriteriasResponse
+}
 export interface CriteriaResponse {
   criteriaId: number
   name: string
-  criteriaScores: CriteriaScoreResponse[]
+  criteriaScores?: CriteriaScoreResponse[]
 }
 
 export interface CriteriaScoreResponse {
