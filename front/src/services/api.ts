@@ -24,6 +24,7 @@ export const getEvaluatedStudentScores = async (
     `/scores/evaluation/${evaluationId}/evaluatedStudent/${evaluatedStudentId}`
   )
 
-export const sendCriteria = async (payload: CriteriaPayload) => instance.get('')
+export const sendCriteria = async (payload: CriteriaPayload) =>
+  instance.post('/criterias', { ...payload })
 
 export default instance

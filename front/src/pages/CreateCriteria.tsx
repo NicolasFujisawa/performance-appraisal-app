@@ -19,8 +19,8 @@ export default function CreateCriteria() {
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
-    const result = await sendCriteria(criteria)
-    alert(result.data)
+    const result = await sendCriteria({ ...criteria, name })
+    alert('Critério criado com sucesso')
 
     clearData()
   }
