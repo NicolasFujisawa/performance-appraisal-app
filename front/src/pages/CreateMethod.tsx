@@ -3,7 +3,7 @@ import DeleteButton from '../commons/components/DeleteButton'
 import { CreateMethodPayload } from '../interfaces/create.method.payload'
 import {
   CriteriaResponse,
-  CriteriasResponse,
+  CriteriasResponse
 } from '../interfaces/criterias.response'
 import { createMethod, getCriterias } from '../services/api'
 import '../styles/pages/main-page.css'

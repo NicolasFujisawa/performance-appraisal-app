@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { CreateMethodPayload } from '../interfaces/create.method.payload'
 import { GetCriteriasResponse } from '../interfaces/criterias.response'
 import { CriteriaPayload } from '../interfaces/criterias.scores.payload'
 import { GetEvaluationResponse } from '../interfaces/get.evaluation.response'
@@ -29,7 +30,7 @@ export const sendCriteria = async (payload: CriteriaPayload) => instance.get('')
 export const getCriterias = async () =>
   instance.get<GetCriteriasResponse>('/criterias')
 
-export const createMethod = async (payload: any) =>
+export const createMethod = async (payload: CreateMethodPayload) =>
   instance.post('/methods', payload)
 
 export default instance
