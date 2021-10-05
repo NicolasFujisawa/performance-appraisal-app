@@ -1,37 +1,31 @@
-import { useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import DeleteButton from '../commons/components/DeleteButton'
-import { CriteriaResponse } from '../interfaces/criterias.response'
+import { CreateMethodPayload } from '../interfaces/create.method.payload'
+import {
+  CriteriaResponse,
+  CriteriasResponse,
+} from '../interfaces/criterias.response'
+import { createMethod, getCriterias } from '../services/api'
 import '../styles/pages/main-page.css'
 import '../styles/pages/method-page.css'
 
-const mockCriterias: CriteriaResponse[] = [
-  {} as CriteriaResponse,
-  {
-    criteriaId: 1,
-    name: 'Criteria 1',
-    criteriaScores: [],
-  },
-  {
-    criteriaId: 2,
-    name: 'Criteria 2',
-    criteriaScores: [],
-  },
-  {
-    criteriaId: 3,
-    name: 'Criteria 3',
-    criteriaScores: [],
-  },
-]
-
 export default function Method() {
-  const [criterias, setCriterias] =
-    useState<Array<CriteriaResponse>>(mockCriterias)
-  const [chosenCriterias, setChosenCriterias] = useState<
-    Array<CriteriaResponse>
-  >([])
+  const [criterias, setCriterias] = useState<CriteriasResponse>([])
+  const [chosenCriterias, setChosenCriterias] = useState<CriteriaResponse[]>([])
   const [name, setName] = useState('')
 
-  // nao gostou muda
+  const loadCriterias = async () => {
+    const {
+      data: { data: criterias },
+    } = await getCriterias()
+
+    setCriterias([{} as CriteriaResponse, ...criterias])
+  }
+
+  useEffect(() => {
+    loadCriterias()
+  }, [])
+
   const handleChange = (e: any) => {
     const { value } = e.target
 
@@ -57,7 +51,26 @@ export default function Method() {
     setChosenCriterias(newChosenCriterias)
   }
 
-  const handleSubmit = () => {}
+  const buildPayload = () =>
+    ({
+      name,
+      teacher: 1,
+      criterias: chosenCriterias,
+    } as CreateMethodPayload)
+
+  const checkForm = () => {
+    if (!chosenCriterias.length) throw new Error('Lista de criterios vazia')
+    if (!name.trim().length) throw new Error('Nome invalido')
+  }
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    checkForm()
+    const payload = buildPayload()
+    await createMethod(payload)
+    setChosenCriterias([])
+    setName('')
+  }
 
   return (
     <div id="page-component">
@@ -68,12 +81,12 @@ export default function Method() {
             <div className="input-block">
               <label htmlFor="name">Nome</label>
               <div className="method-name-input">
-              <input
-                id="name"
-                placeholder="Nome do Método"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
+                <input
+                  id="name"
+                  placeholder="Nome do Método"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                />
               </div>
             </div>
 
@@ -81,7 +94,11 @@ export default function Method() {
               <label htmlFor="name">Critérios</label>
               <select className="drop-down" value={''} onChange={handleChange}>
                 {criterias.map((criteria: CriteriaResponse) => (
-                  <option key={criteria.criteriaId} value={criteria.name} className="drop-down-option">
+                  <option
+                    key={criteria.criteriaId}
+                    value={criteria.name}
+                    className="drop-down-option"
+                  >
                     {criteria.name}
                   </option>
                 ))}
