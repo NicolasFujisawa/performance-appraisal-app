@@ -1,3 +1,4 @@
+import { CreateMethodDto } from '@/dtos/create.method.dto';
 import { Method } from '@/entity/method.entity';
 import { getRepository, Repository } from 'typeorm';
 
@@ -12,8 +13,8 @@ class MethodsService {
     return this._methodRepository;
   }
 
-  public async findAll() {
-    return this.methodRepository.find();
+  public async create(payload: CreateMethodDto) {
+    return this.methodRepository.save({ ...payload });
   }
 }
 
