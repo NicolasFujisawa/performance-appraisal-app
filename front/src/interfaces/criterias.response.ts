@@ -3,7 +3,6 @@ export type CriteriasResponse = CriteriaResponse[]
 export interface CriteriaResponse {
   criteriaId: number
   name: string
-  methodId: number
   criteriaScores: CriteriaScoreResponse[]
 }
 
