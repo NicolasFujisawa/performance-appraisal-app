@@ -15,6 +15,15 @@ class MethodsController {
       next(error);
     }
   };
+
+  public findAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const criterias: Method[] = await this.methodsService.findAll();
+      res.status(200).json({ data: criterias });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MethodsController;
