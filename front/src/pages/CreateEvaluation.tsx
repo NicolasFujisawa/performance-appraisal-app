@@ -4,6 +4,7 @@ import { getMethods, getTeams, createEvaluation } from '../services/api'
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { MethodsResponse } from '../interfaces/methods.response'
 import { TeamsResponse } from '../interfaces/teams.response'
+import SideBar from '../commons/components/SideBar'
 interface FormValues {
   name: string
   start: string
@@ -77,6 +78,7 @@ export default function Evaluation() {
 
   return (
     <div id="page-component">
+      <SideBar />
       <form id="page-container" onSubmit={handleSubmit}>
         <fieldset>
           <legend>Nova Avaliação</legend>

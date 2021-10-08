@@ -8,6 +8,7 @@ import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.score
 import { Evaluation as IEvaluation } from '../interfaces/evaluation'
 import { TeamMember } from '../interfaces/team'
 import { useQuery } from '../commons/utils/useQuery'
+import SideBar from '../commons/components/SideBar'
 
 interface FormValues {
   studentId: number
@@ -90,6 +91,8 @@ export default function Evaluation() {
 
   return (
     <div id="page-component">
+      <SideBar />
+
       <main>
         <div id="page-container">
           <div className="page-team-info">
