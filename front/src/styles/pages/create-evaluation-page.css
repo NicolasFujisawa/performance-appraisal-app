@@ -34,6 +34,8 @@ form#page-container .input-block input[type='radio'] + label {
   display: inline;
 }
 form#page-container .input-block input[type='radio'] {
+  width: auto;
+  height: auto;
   border: 1px solid #5d696b;
   border-radius: 8px;
   outline: none;

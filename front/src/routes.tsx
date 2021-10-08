@@ -12,6 +12,7 @@ function Routes() {
           path="/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results"
           component={Results}
         />
+        <Route path="/evaluation/new" component={CreateEvaluation} />
         <Route path="/evaluation/:id" component={Evaluation} />
         <Route path="/criteria/new" component={CreateCriteria} />
       </Switch>
