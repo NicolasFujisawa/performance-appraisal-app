@@ -1,19 +1,20 @@
-import MethodsController from '@/controllers/methods.controller';
+import TeamsController from '@/controllers/teams.controller';
 import { Routes } from '@interfaces/routes.interface';
 import { Router } from 'express';
 
-class MethodsRoute implements Routes {
-  public path = '/methods';
+class TeamsRoute implements Routes {
+  public path = '/teams';
   public router = Router();
-  public controller = new MethodsController();
+  public controller = new TeamsController();
 
   constructor() {
     this.initializeRoutes();
   }
 
   private initializeRoutes() {
+    this.router.post(`${this.path}/`, this.controller.create);
     this.router.get(`${this.path}/`, this.controller.findAll);
   }
 }
 
-export default MethodsRoute;
+export default TeamsRoute;
