@@ -3,6 +3,7 @@ import CreateCriteria from './pages/CreateCriteria'
 import Evaluation from './pages/Evaluation'
 import CreateMethod from './pages/CreateMethod'
 import Results from './pages/Results'
+import CreateEvaluation from './pages/CreateEvaluation'
 
 function Routes() {
   return (
@@ -12,6 +13,7 @@ function Routes() {
           path="/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results"
           component={Results}
         />
+        <Route path="/evaluation/new" component={CreateEvaluation} />
         <Route path="/evaluation/:id" component={Evaluation} />
         <Route path="/method/new" component={CreateMethod} />
         <Route path="/criteria/new" component={CreateCriteria} />

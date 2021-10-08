@@ -16,6 +16,10 @@ class MethodsService {
   public async create(payload: CreateMethodDto) {
     return this.methodRepository.save({ ...payload });
   }
+
+  public async findAll() {
+    return this.methodRepository.find();
+  }
 }
 
 export default MethodsService;

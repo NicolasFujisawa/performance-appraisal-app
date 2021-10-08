@@ -1,7 +1,13 @@
 import { useState } from 'react'
 import { FiTrash2 } from 'react-icons/fi'
 
-export default function DeleteButton({ action, id }: { action: any; id: number }) {
+export default function DeleteButton({
+  action,
+  id,
+}: {
+  action: any
+  id: number
+}) {
   const [level, setLevel] = useState(0)
   const [color, setColor] = useState('#413c62')
 
