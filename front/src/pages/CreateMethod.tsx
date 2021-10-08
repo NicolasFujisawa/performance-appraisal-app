@@ -79,7 +79,7 @@ export default function Method() {
       <main>
         <form id="page-container" onSubmit={handleSubmit}>
           <fieldset>
-            <legend>Dados</legend>
+            <legend>Novo Método</legend>
             <div className="input-block">
               <label htmlFor="name">Nome</label>
               <div className="method-name-input">

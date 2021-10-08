@@ -13,6 +13,16 @@ export default function SideBar() {
           <p>Criar Avaliação</p>
         </Link>
 
+        <Link to="/method/new" className="link-app">
+          <FiPlus size={24} color="rgba(0, 0, 0, 0.6)" />
+          <p>Criar Método</p>
+        </Link>
+
+        <Link to="/criteria/new" className="link-app">
+          <FiPlus size={24} color="rgba(0, 0, 0, 0.6)" />
+          <p>Criar Critério</p>
+        </Link>
+
         <Link to="/evaluation/" className="link-app">
           <FiList size={24} color="rgba(0, 0, 0, 0.6)" />
           <p>Listar Avaliações</p>

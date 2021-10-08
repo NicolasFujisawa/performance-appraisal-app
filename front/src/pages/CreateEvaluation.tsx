@@ -58,7 +58,9 @@ export default function Evaluation() {
     event.preventDefault()
     const payload = buildRequestPayload()
     const result = await createEvaluation(payload)
-    alert(`Avaliação ${result.data.data.name} criada com sucesso!`)
+    alert(
+      `Avaliação ${result.data.data.name} criada com sucesso! id: ${result.data.data.evaluationId}`
+    )
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {

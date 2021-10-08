@@ -77,7 +77,7 @@ export default function CreateCriteria() {
       <main>
         <form id="page-container" onSubmit={handleSubmit}>
           <fieldset>
-            <legend>Critério</legend>
+            <legend>Novo Critério</legend>
 
             <div className="input-block">
               <label htmlFor="name">Nome</label>
