@@ -1,6 +1,7 @@
 import { FiChevronLeft, FiList, FiPlus } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom'
 import '../../styles/components/sidebar.css'
+import logoFatec365 from '../../images/logo.png'
 
 export default function SideBar() {
   const { goBack } = useHistory()
@@ -8,6 +9,10 @@ export default function SideBar() {
   return (
     <aside className="app-sidebar">
       <div className="sidebar-content">
+        <Link to="" className="enter-landing">
+          <img src={logoFatec365} alt="Fatec365" />
+        </Link>
+
         <Link to="/evaluation/new" className="link-app">
           <FiPlus size={24} color="rgba(0, 0, 0, 0.6)" />
           <p>Criar Avaliação</p>

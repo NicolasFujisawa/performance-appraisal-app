@@ -2,11 +2,23 @@ aside.app-sidebar {
   position: fixed;
   height: 100%;
   padding: 32px 24px;
-  background: linear-gradient(329.54deg, #6c63ff 0%, #716af8 100%);
+  background: #6c63ff;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+}
+
+aside.app-sidebar img {
+  width: 100px;
+}
+
+aside.app-sidebar .enter-landing {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -18,7 +30,7 @@ aside.app-sidebar a + a {
   margin-top: 15px;
 }
 
-aside.app-sidebar a,
+aside.app-sidebar .link-app,
 aside.app-sidebar button {
   min-height: 48px;
   min-width: 48px;
@@ -26,7 +38,7 @@ aside.app-sidebar button {
 
   border: 0;
 
-  background: #f1c40f;
+  background: #ffd761;
   border-radius: 16px;
   text-decoration: none;
   color: #413c62;
