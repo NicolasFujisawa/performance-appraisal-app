@@ -1,9 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react'
 import DeleteButton from '../commons/components/DeleteButton'
+import SideBar from '../commons/components/SideBar'
 import { CreateMethodPayload } from '../interfaces/create.method.payload'
 import {
   CriteriaResponse,
-  CriteriasResponse
+  CriteriasResponse,
 } from '../interfaces/criterias.response'
 import { createMethod, getCriterias } from '../services/api'
 import '../styles/pages/main-page.css'
@@ -74,10 +75,11 @@ export default function Method() {
 
   return (
     <div id="page-component">
+      <SideBar />
       <main>
         <form id="page-container" onSubmit={handleSubmit}>
           <fieldset>
-            <legend>Dados</legend>
+            <legend>Novo Método</legend>
             <div className="input-block">
               <label htmlFor="name">Nome</label>
               <div className="method-name-input">

@@ -8,6 +8,7 @@ import { sendCriteria } from '../services/api'
 import { FiPlus } from 'react-icons/fi'
 import '../styles/pages/main-page.css'
 import '../styles/pages/create-criteria-page.css'
+import SideBar from '../commons/components/SideBar'
 
 export default function CreateCriteria() {
   const [name, setName] = useState('')
@@ -72,10 +73,11 @@ export default function CreateCriteria() {
 
   return (
     <div id="page-component">
+      <SideBar />
       <main>
         <form id="page-container" onSubmit={handleSubmit}>
           <fieldset>
-            <legend>Critério</legend>
+            <legend>Novo Critério</legend>
 
             <div className="input-block">
               <label htmlFor="name">Nome</label>

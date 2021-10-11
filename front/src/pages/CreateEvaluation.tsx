@@ -4,6 +4,7 @@ import { getMethods, getTeams, createEvaluation } from '../services/api'
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { MethodsResponse } from '../interfaces/methods.response'
 import { TeamsResponse } from '../interfaces/teams.response'
+import SideBar from '../commons/components/SideBar'
 interface FormValues {
   name: string
   start: string
@@ -57,7 +58,9 @@ export default function Evaluation() {
     event.preventDefault()
     const payload = buildRequestPayload()
     const result = await createEvaluation(payload)
-    alert(`Avaliação ${result.data.data.name} criada com sucesso!`)
+    alert(
+      `Avaliação ${result.data.data.name} criada com sucesso! id: ${result.data.data.evaluationId}`
+    )
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -77,6 +80,7 @@ export default function Evaluation() {
 
   return (
     <div id="page-component">
+      <SideBar />
       <form id="page-container" onSubmit={handleSubmit}>
         <fieldset>
           <legend>Nova Avaliação</legend>

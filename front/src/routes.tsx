@@ -4,11 +4,13 @@ import Evaluation from './pages/Evaluation'
 import CreateMethod from './pages/CreateMethod'
 import Results from './pages/Results'
 import CreateEvaluation from './pages/CreateEvaluation'
+import { Landing } from './pages/Landing'
 
 function Routes() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/" exact component={Landing} />
         <Route
           path="/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results"
           component={Results}
