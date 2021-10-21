@@ -39,9 +39,9 @@ Server: http://localhost:8080/
 - Telas de CRUD para as novas funções
 - Criação do sidebar e navegação das telas
 
-### Spring 3
+### Sprint 3
 
-- Auth0 com typeorm
+- Basic Authentication
 - Tela de Login e gerenciamento de usuários
 - Permissões para professores e alunos
 - Ajustes na tela de relatórios
