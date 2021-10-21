@@ -51,3 +51,4 @@ Server: http://localhost:8080/
 - Pequenas correções nas telas
 - Inclusão de um gráfico melhorado na tela de resultados
 - Usabilidade do usuário
+- Inclusão da regra de LGPD
