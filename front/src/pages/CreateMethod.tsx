@@ -87,6 +87,7 @@ export default function Method() {
                   id="name"
                   placeholder="Nome do Método"
                   value={name}
+                  required
                   onChange={(event) => setName(event.target.value)}
                 />
               </div>
