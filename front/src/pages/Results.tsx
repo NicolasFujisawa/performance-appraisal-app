@@ -8,6 +8,7 @@ import {
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { getEvaluation, getEvaluatedStudentScores } from '../services/api'
+import SideBar from '../commons/components/SideBar'
 
 interface ResultsParams {
   evaluation_id: string
@@ -68,6 +69,7 @@ export default function Results() {
 
   return (
     <div id="page-component">
+      <SideBar />
       <main>
         <div id="page-container">
           <h1>Avaliação</h1>
@@ -82,7 +84,7 @@ export default function Results() {
             console.log(score)
             return (
               <p
-                key={`criteria-result-`}
+                key={`criteria-result-${score.scoreId}`}
               >{`${score.criteriaScore?.criteria.name} : ${score.criteriaScore?.name}`}</p>
             )
           })}

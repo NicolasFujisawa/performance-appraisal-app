@@ -85,6 +85,7 @@ export default function CreateCriteria() {
                 id="name"
                 placeholder="Nome do Critério"
                 value={name}
+                required
                 onChange={(event) => setName(event.target.value)}
               />
             </div>

@@ -18,13 +18,9 @@ export default function Evaluation() {
   const [methods, setMethods] = useState<MethodsResponse>()
   const [teams, setTeams] = useState<TeamsResponse>()
   const [formValues, setFormValues] = useState<FormValues>({
-    name: '',
     start: '2021-07-10',
-    end: '',
-    isLastEvaluation: true,
-    methodId: 0,
-    teamId: 0,
-  })
+    isLastEvaluation: false,
+  } as FormValues)
 
   const loadMethod = async () => {
     const {
