@@ -42,9 +42,9 @@ Server: http://localhost:8080/
 ### Sprint 3
 
 - Basic Authentication
-- Tela de Login e gerenciamento de usuários
+- Tela de Login
 - Permissões para professores e alunos
-- Ajustes na tela de relatórios
+- Inclusão do gráfico na tela de resultados
 
 ### Sprint 4
 
