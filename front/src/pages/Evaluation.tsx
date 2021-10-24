@@ -29,9 +29,8 @@ export default function Evaluation() {
 
   const [criterias, setCriterias] = useState<CriteriasResponse>()
   const [formValues, setFormValues] = useState<FormValues>({
-    studentId: 0,
     criterias: {},
-  })
+  } as FormValues)
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
   const [index, setIndex] = useState(0)
   const currentStudent = teamMembers[index]?.student
