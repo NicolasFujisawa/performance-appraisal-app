@@ -1,4 +1,4 @@
-INSERT INTO teacher (teacher_id, name) VALUES (1, 'Teacher A');
+INSERT INTO teacher (teacher_id, name, "teacherIdentifier") VALUES (1, 'Teacher A', 'teacherzinho');
 INSERT INTO team (team_id, name, teacher_id) VALUES (1, 'Team A', 1);
 
 INSERT INTO student (student_id, name, ra) VALUES (1, 'Student A', '222');
