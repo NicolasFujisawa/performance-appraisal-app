@@ -9,6 +9,9 @@ import { FiPlus } from 'react-icons/fi'
 import '../styles/pages/main-page.css'
 import '../styles/pages/create-criteria-page.css'
 import SideBar from '../commons/components/SideBar'
+import NoPermission from '../commons/components/NoPermissions'
+import { useAppSelector } from '../store/hooks'
+import { selectUser } from '../store/selectors'
 
 export default function CreateCriteria() {
   const [name, setName] = useState('')
@@ -17,6 +20,7 @@ export default function CreateCriteria() {
   const [criteria, setCriteria] = useState<CriteriaPayload>(
     {} as CriteriaPayload
   )
+  const { role } = useAppSelector(selectUser)
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -69,6 +73,15 @@ export default function CreateCriteria() {
       array[index].value = index
     }, criteriasSorted)
     return criteriasSorted
+  }
+
+  if (role !== 'teacher') {
+    return (
+      <div id="page-component">
+        <SideBar />
+        <NoPermission />
+      </div>
+    )
   }
 
   return (
