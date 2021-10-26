@@ -15,7 +15,7 @@ export class Student {
 
   @Column()
   @IsNotEmpty()
-  ra: number;
+  ra: string;
 
   @OneToMany(() => TeamMember, member => member.student)
   teams: TeamMember[];

@@ -1,13 +1,17 @@
+import { Method } from '@/entity/method.entity';
+import { Score } from '@/entity/score.entity';
 import { Team } from '@/entity/team.entity';
 import { IsNotEmpty } from 'class-validator';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Method } from '@/entity/method.entity';
-import { Score } from '@/entity/score.entity';
 
 @Entity()
 export class Teacher {
   @PrimaryGeneratedColumn({ name: 'teacher_id' })
   teacherId: number;
+
+  @IsNotEmpty()
+  @Column()
+  teacherIdentifier: string;
 
   @Column()
   @IsNotEmpty()
