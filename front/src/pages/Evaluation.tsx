@@ -1,14 +1,15 @@
-import '../styles/pages/main-page.css'
-import '../styles/pages/evaluation-page.css'
-import { getEvaluation, sendEvaluationScores } from '../services/api'
-import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
-import { CriteriasResponse } from '../interfaces/criterias.response'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
-import { Evaluation as IEvaluation } from '../interfaces/evaluation'
-import { TeamMember } from '../interfaces/team'
-import { useQuery } from '../commons/utils/useQuery'
 import SideBar from '../commons/components/SideBar'
+import { CriteriasResponse } from '../interfaces/criterias.response'
+import { Evaluation as IEvaluation } from '../interfaces/evaluation'
+import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
+import { TeamMember } from '../interfaces/team'
+import { getEvaluation, sendEvaluationScores } from '../services/api'
+import { useAppSelector } from '../store/hooks'
+import { selectUser } from '../store/selectors'
+import '../styles/pages/evaluation-page.css'
+import '../styles/pages/main-page.css'
 
 interface FormValues {
   studentId: number
@@ -22,10 +23,11 @@ interface EvaluationParams {
 }
 
 export default function Evaluation() {
+  const { userId, role } = useAppSelector(selectUser)
+
   const [evaluation, setEvaluation] = useState<IEvaluation>({} as any)
 
   const params = useParams<EvaluationParams>()
-  const query = useQuery()
 
   const [criterias, setCriterias] = useState<CriteriasResponse>()
   const [formValues, setFormValues] = useState<FormValues>({
@@ -49,23 +51,26 @@ export default function Evaluation() {
   }, [params])
 
   function buildRequestPayload(): SendEvaluationScoresPayload {
+    const evaluator =
+      role === 'teacher'
+        ? { evaluatorTeacher: userId }
+        : { evaluatorStudent: userId }
+
     return Object.entries(formValues.criterias).map(([key, value]) => ({
       evaluatedStudent: formValues.studentId,
-      evaluatorStudent: parseInt(query.get('student') || '1'),
-      evaluatorTeacher: parseInt(query.get('teacher') || '1'),
       criteriaScore: value,
       evaluation: evaluation.evaluationId,
       criteria: parseInt(key),
+      ...evaluator,
     }))
   }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
     const payload = buildRequestPayload()
-    const result = await sendEvaluationScores(payload)
+    await sendEvaluationScores(payload)
     handleIndex()
     setFormValues({ studentId: 0, criterias: {} })
-    console.log(payload)
   }
 
   function handleCriteriaScoreChange(event: ChangeEvent<HTMLInputElement>) {
