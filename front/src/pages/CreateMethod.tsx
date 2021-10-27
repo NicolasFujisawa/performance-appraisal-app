@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 import DeleteButton from '../commons/components/DeleteButton'
+import NoPermission from '../commons/components/NoPermissions'
 import SideBar from '../commons/components/SideBar'
 import { CreateMethodPayload } from '../interfaces/create.method.payload'
 import {
@@ -7,6 +8,8 @@ import {
   CriteriasResponse,
 } from '../interfaces/criterias.response'
 import { createMethod, getCriterias } from '../services/api'
+import { useAppSelector } from '../store/hooks'
+import { selectUser } from '../store/selectors'
 import '../styles/pages/main-page.css'
 import '../styles/pages/method-page.css'
 
@@ -14,6 +17,7 @@ export default function Method() {
   const [criterias, setCriterias] = useState<CriteriasResponse>([])
   const [chosenCriterias, setChosenCriterias] = useState<CriteriaResponse[]>([])
   const [name, setName] = useState('')
+  const { role } = useAppSelector(selectUser)
 
   const loadCriterias = async () => {
     const {
@@ -71,6 +75,15 @@ export default function Method() {
     await createMethod(payload)
     setChosenCriterias([])
     setName('')
+  }
+
+  if (role !== 'teacher') {
+    return (
+      <div id="page-component">
+        <SideBar />
+        <NoPermission />
+      </div>
+    )
   }
 
   return (

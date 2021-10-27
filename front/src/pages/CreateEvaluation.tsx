@@ -5,6 +5,9 @@ import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { MethodsResponse } from '../interfaces/methods.response'
 import { TeamsResponse } from '../interfaces/teams.response'
 import SideBar from '../commons/components/SideBar'
+import NoPermission from '../commons/components/NoPermissions'
+import { useAppSelector } from '../store/hooks'
+import { selectUser } from '../store/selectors'
 interface FormValues {
   name: string
   start: string
@@ -21,6 +24,7 @@ export default function Evaluation() {
     start: '2021-07-10',
     isLastEvaluation: false,
   } as FormValues)
+  const { role } = useAppSelector(selectUser)
 
   const loadMethod = async () => {
     const {
@@ -72,6 +76,15 @@ export default function Evaluation() {
     setFormValues((prevValues) => {
       return { ...prevValues, [name]: isNaN(intvalue) ? 0 : intvalue }
     })
+  }
+
+  if (role !== 'teacher') {
+    return (
+      <div id="page-component">
+        <SideBar />
+        <NoPermission />
+      </div>
+    )
   }
 
   return (
