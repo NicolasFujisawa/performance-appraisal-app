@@ -39,6 +39,11 @@ export default function SideBar() {
           <FiList size={24} color="rgba(0, 0, 0, 0.6)" />
           <p>Listar Avaliações</p>
         </Link>
+
+        <Link to="/teams" className="link-app">
+          <FiList size={24} color="rgba(0, 0, 0, 0.6)" />
+          <p>Listar equipes</p>
+        </Link>
       </div>
       <footer>
         <button onClick={goBack} className="link-app">

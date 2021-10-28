@@ -26,9 +26,11 @@ services:
       POSTGRESQL_USERNAME: root
       POSTGRESQL_PASSWORD: password
       POSTGRESQL_DATABASE: typeorm
+      PGPASSWORD: password
     ports:
       - '5432:5432'
+    volumes:
+      - data:/bitnami/postgresql
 
 volumes:
   data:
-    driver: local
