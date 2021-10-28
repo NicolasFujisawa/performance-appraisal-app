@@ -1,10 +1,11 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import CreateCriteria from './pages/CreateCriteria'
-import Evaluation from './pages/Evaluation'
-import CreateMethod from './pages/CreateMethod'
-import Results from './pages/Results'
 import CreateEvaluation from './pages/CreateEvaluation'
+import CreateMethod from './pages/CreateMethod'
+import Evaluation from './pages/Evaluation'
 import { Landing } from './pages/Landing'
+import ListTeams from './pages/ListTeams'
+import Results from './pages/Results'
 import { Login } from './pages/Login'
 
 function Routes() {
@@ -21,6 +22,7 @@ function Routes() {
         <Route path="/evaluation/:id" component={Evaluation} />
         <Route path="/method/new" component={CreateMethod} />
         <Route path="/criteria/new" component={CreateCriteria} />
+        <Route path="/teams" component={ListTeams} />
       </Switch>
     </BrowserRouter>
   )
