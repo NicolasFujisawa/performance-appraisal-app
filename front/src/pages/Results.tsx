@@ -64,7 +64,6 @@ export default function Results() {
           </h3>
           <br />
           <h1>Resultados</h1>
-          <h2>{evaluatedName}</h2>
           {scores ? (
             <EvaluationChart
               evaluatedName={evaluatedName}
