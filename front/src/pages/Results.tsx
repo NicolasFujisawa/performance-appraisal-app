@@ -1,14 +1,12 @@
 import '../styles/pages/main-page.css'
 import '../styles/pages/results-page.css'
 import { Evaluation as IEvaluation } from '../interfaces/evaluation'
-import {
-  ScoresResponse as IScoresResponse,
-  ScoreResponse as IScoreResponse,
-} from '../interfaces/scores.response'
+import { ScoresResponse as IScoresResponse } from '../interfaces/scores.response'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { getEvaluation, getEvaluatedStudentScores } from '../services/api'
 import SideBar from '../commons/components/SideBar'
+import EvaluationChart from '../commons/components/EvaluationChart'
 
 interface ResultsParams {
   evaluation_id: string
@@ -23,37 +21,24 @@ export default function Results() {
 
   const params = useParams<ResultsParams>()
 
-  const loadScores = async () => {
-    const {
-      data: { data },
-    } = await getEvaluatedStudentScores(
-      parseInt(params.evaluated_id),
-      parseInt(params.evaluation_id)
-    )
-    setScores(
-      data.sort((a: IScoreResponse, b: IScoreResponse) =>
-        a.criteriaScore?.criteria.name > b.criteriaScore?.criteria.name
-          ? 1
-          : a.criteriaScore?.criteria.name === b.criteriaScore?.criteria.name
-          ? a.criteriaScore?.name > b.criteriaScore?.name
-            ? 1
-            : -1
-          : -1
-      )
-    )
-    setEvaluatedName(data[0]?.evaluatedStudent.name)
-  }
-
-  const loadEvaluation = async () => {
-    const {
-      data: { data },
-    } = await getEvaluation(parseInt(params.evaluation_id))
-    setEvaluation(data)
-    setFinalDate(new Date(data.end))
-    console.log(data)
-  }
-
   useEffect(() => {
+    const loadScores = async () => {
+      const {
+        data: { data },
+      } = await getEvaluatedStudentScores(
+        parseInt(params.evaluated_id),
+        parseInt(params.evaluation_id)
+      )
+      setScores(data)
+      setEvaluatedName(data[0]?.evaluatedStudent.name)
+    }
+    const loadEvaluation = async () => {
+      const {
+        data: { data },
+      } = await getEvaluation(parseInt(params.evaluation_id))
+      setEvaluation(data)
+      setFinalDate(new Date(data.end))
+    }
     loadEvaluation()
     loadScores()
   }, [params])
@@ -79,15 +64,15 @@ export default function Results() {
           </h3>
           <br />
           <h1>Resultados</h1>
-          <h2>{evaluatedName}</h2>
-          {scores?.map((score) => {
-            console.log(score)
-            return (
-              <p
-                key={`criteria-result-${score.scoreId}`}
-              >{`${score.criteriaScore?.criteria.name} : ${score.criteriaScore?.name}`}</p>
-            )
-          })}
+          {scores ? (
+            <EvaluationChart
+              evaluatedName={evaluatedName}
+              scores={scores}
+              evaluation={evaluation}
+            />
+          ) : (
+            <p>Carregando...</p>
+          )}
         </div>
       </main>
     </div>
