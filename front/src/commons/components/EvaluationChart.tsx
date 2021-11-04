@@ -36,14 +36,14 @@ export default function EvaluationChart(props: any) {
   function createDataChart() {
     const criterias = evaluation.method.criterias
 
-    const newSubjects = criterias.map((criteria) => {
+    const newSubjects = criterias.map((criteria): DataChart => {
       const scoresValuesList = scoresValues(criteria)
 
       return {
         subject: criteria.name,
         fullMark: 100,
         uniqueId: criteriaScoreAverage(scoresValuesList, criteria),
-      } as DataChart
+      }
     })
     setDataChart(newSubjects)
   }
