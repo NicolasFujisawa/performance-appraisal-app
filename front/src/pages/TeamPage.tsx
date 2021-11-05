@@ -61,6 +61,12 @@ export function TeamPage() {
     return !team?.members.find((member) => member.student.studentId === userId)
   }
 
+  function isEvaluationFinished(evaluation: Evaluation) {
+    const now = new Date().getTime()
+    const evaluationEnd = Date.parse(evaluation.end)
+    return now > evaluationEnd
+  }
+
   return (
     <div id="page-component">
       <SideBar />
@@ -84,13 +90,18 @@ export function TeamPage() {
           <h1>Avaliações</h1>
           {evaluations?.map((evaluation) => {
             return (
-              <div className="item-evaluation">
-                <Link
-                  to={'/evaluation/' + evaluation.evaluationId}
-                  key={evaluation.evaluationId}
-                >
-                  {evaluation.name}
-                </Link>
+              <div className="item-evaluation" key={evaluation.evaluationId}>
+                {isEvaluationFinished(evaluation) ? (
+                  <Link
+                    to={`/evaluation/${evaluation.evaluationId}/evaluatedStudent/${userId}/results`}
+                  >
+                    {evaluation.name} - Finalizada
+                  </Link>
+                ) : (
+                  <Link to={`/evaluation/${evaluation.evaluationId}`}>
+                    {evaluation.name} - Em Andamento
+                  </Link>
+                )}
               </div>
             )
           })}
