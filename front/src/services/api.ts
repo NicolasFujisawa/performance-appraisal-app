@@ -3,7 +3,10 @@ import { AuthResponseDto } from '../interfaces/auth.response.dto'
 import { CreateMethodPayload } from '../interfaces/create.method.payload'
 import { GetCriteriasResponse } from '../interfaces/criterias.response'
 import { CriteriaPayload } from '../interfaces/criterias.scores.payload'
-import { GetEvaluationResponse } from '../interfaces/get.evaluation.response'
+import {
+  GetEvaluationResponse,
+  GetEvaluationsResponse,
+} from '../interfaces/get.evaluation.response'
 import { GetMethodsResponse } from '../interfaces/get.methods.response'
 import { GetScoresResponse } from '../interfaces/get.scores.response'
 import { GetTeamsResponse } from '../interfaces/get.teams.response'
@@ -23,6 +26,9 @@ export const createEvaluation = async (payload: SendCreateEvaluationPayload) =>
 
 export const getEvaluation = async (evaluationId: number) =>
   instance.get<GetEvaluationResponse>(`/evaluations/${evaluationId}`)
+
+export const getEvaluationByTeam = async (team: number) =>
+  instance.get<GetEvaluationsResponse>(`/evaluations/team/${team}`)
 
 export const getEvaluatedStudentScores = async (
   evaluatedStudentId: number,
