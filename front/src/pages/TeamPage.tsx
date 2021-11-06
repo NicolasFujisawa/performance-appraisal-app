@@ -4,29 +4,12 @@ import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import SideBar from '../commons/components/SideBar'
 import { Evaluation } from '../interfaces/evaluation'
-import { Student, Team, TeamMember } from '../interfaces/team'
-import { getEvaluationByTeam } from '../services/api'
+import { Team } from '../interfaces/team'
+import { getEvaluationByTeam, getTeamById } from '../services/api'
 import { selectUser } from '../store/selectors'
 
 interface TeamParams {
   team_id: string
-}
-
-const getTeam = {
-  data: {
-    members: [
-      {
-        student: { name: 'jabbinho', studentId: 1 } as Student,
-        teamMemberId: 1,
-      },
-      {
-        student: { name: 'roe', studentId: 2 } as Student,
-        teamMemberId: 2,
-      },
-    ] as TeamMember[],
-    name: 'Hadowken team',
-    teamId: 1,
-  } as Team,
 }
 
 export function TeamPage() {
@@ -35,7 +18,7 @@ export function TeamPage() {
   const { role, userId } = useSelector(selectUser)
 
   const [evaluations, setEvaluations] = useState<Evaluation[]>()
-  const [team, setTeam] = useState<Team>() // TODO tipo GetTeam (tem o formato = {data: {Team}})
+  const [team, setTeam] = useState<Team>()
 
   useEffect(() => {
     const loadEvaluations = async () => {
@@ -44,8 +27,10 @@ export function TeamPage() {
       } = await getEvaluationByTeam(teamId)
       setEvaluations(data)
     }
-    const loadTeam = () => {
-      const { data } = getTeam // TODO criar serviço no back/front para pegar um team por id
+    const loadTeam = async () => {
+      const {
+        data: { data },
+      } = await getTeamById(teamId)
       setTeam(data)
     }
     loadEvaluations()

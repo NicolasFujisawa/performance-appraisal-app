@@ -19,4 +19,5 @@ export interface Student {
 export interface Teacher {
   name: string
   teacherId: number
+  teacherIdentifier: string
 }
