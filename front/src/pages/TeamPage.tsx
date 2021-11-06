@@ -7,6 +7,7 @@ import { Evaluation } from '../interfaces/evaluation'
 import { Team } from '../interfaces/team'
 import { getEvaluationByTeam, getTeamById } from '../services/api'
 import { selectUser } from '../store/selectors'
+import '../styles/pages/team-page.css'
 
 interface TeamParams {
   team_id: string
@@ -62,9 +63,9 @@ export function TeamPage() {
               <button onSubmit={handleJoin}>Ingressar</button>
             </>
           )}
-          <h1>Equipe</h1>
+          <h1 className="title">Equipe</h1>
           <h2>{team?.name}</h2>
-          <h1>Participantes</h1>
+          <h1 className="title">Participantes</h1>
           {team?.members.map((member) => {
             return (
               <div className="item-member" key={member.teamMemberId}>
@@ -72,18 +73,22 @@ export function TeamPage() {
               </div>
             )
           })}
-          <h1>Avaliações</h1>
+          <h1 className="title">Avaliações</h1>
           {evaluations?.map((evaluation) => {
             return (
               <div className="item-evaluation" key={evaluation.evaluationId}>
                 {isEvaluationFinished(evaluation) ? (
                   <Link
+                    className="link"
                     to={`/evaluation/${evaluation.evaluationId}/evaluatedStudent/${userId}/results`}
                   >
                     {evaluation.name} - Finalizada
                   </Link>
                 ) : (
-                  <Link to={`/evaluation/${evaluation.evaluationId}`}>
+                  <Link
+                    className="link"
+                    to={`/evaluation/${evaluation.evaluationId}`}
+                  >
                     {evaluation.name} - Em Andamento
                   </Link>
                 )}
@@ -91,9 +96,9 @@ export function TeamPage() {
             )
           })}
           {role === 'teacher' && (
-            <>
-              <Link to="/evaluation/new">Nova Avaliação</Link>
-            </>
+            <Link className="link" to="/evaluation/new">
+              <div id="newEvaluation">Nova Avaliação</div>
+            </Link>
           )}
         </div>
       </main>
