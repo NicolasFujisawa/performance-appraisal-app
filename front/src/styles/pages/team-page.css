@@ -1,0 +1,25 @@
+.title {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 40px;
+  color: #867fb1;
+}
+
+.item-evaluation {
+  padding: 15px;
+  border: 1px solid #00000075;
+  background-color: #d8d8d8;
+}
+
+.link {
+  text-decoration: none;
+}
+
+#newEvaluation {
+  background-color: #58daec;
+  color: #fff;
+  padding: 15px;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 10px;
+}
