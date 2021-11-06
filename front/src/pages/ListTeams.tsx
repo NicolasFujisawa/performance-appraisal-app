@@ -5,6 +5,7 @@ import { TeamsResponse } from '../interfaces/teams.response'
 import { getTeams } from '../services/api'
 import '../styles/pages/main-page.css'
 import '../styles/pages/results-page.css'
+import '../styles/pages/list-team-page.css'
 
 export default function ListTeams() {
   const [teams, setTeams] = useState<TeamsResponse>()
@@ -27,14 +28,15 @@ export default function ListTeams() {
       <main>
         <div id="page-container">
           <h1>Equipes</h1>
-          <div id="teams-block">
-            {teams?.map((team) => (
-              <div key={`team-block-${team.teamId}`}>
-                <span>{team.name}</span>
-                <Link to={`/teams/${team.teamId}`}>Ver</Link>
-              </div>
-            ))}
-          </div>
+          {teams?.map((team) => (
+            <div id="teams-block">
+              <Link id="link" to={`/teams/${team.teamId}`}>
+                <div key={`team-block-${team.teamId}`}>
+                  <span>{team.name}</span>
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </main>
     </div>
