@@ -1,9 +1,9 @@
 import { FiChevronLeft, FiList, FiPlus } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom'
-import '../../styles/components/sidebar.css'
 import logoFatec365 from '../../images/logo.png'
 import { useAppSelector } from '../../store/hooks'
 import { selectUser } from '../../store/selectors'
+import '../../styles/components/sidebar.css'
 
 export default function SideBar() {
   const { goBack } = useHistory()
@@ -42,7 +42,7 @@ export default function SideBar() {
 
         <Link to="/teams" className="link-app">
           <FiList size={24} color="rgba(0, 0, 0, 0.6)" />
-          <p>Listar equipes</p>
+          <p>Listar Equipes</p>
         </Link>
       </div>
       <footer>

@@ -5,8 +5,9 @@ import CreateMethod from './pages/CreateMethod'
 import Evaluation from './pages/Evaluation'
 import { Landing } from './pages/Landing'
 import ListTeams from './pages/ListTeams'
-import Results from './pages/Results'
 import { Login } from './pages/Login'
+import Results from './pages/Results'
+import { TeamPage } from './pages/TeamPage'
 
 function Routes() {
   return (
@@ -22,7 +23,8 @@ function Routes() {
         <Route path="/evaluation/:id" component={Evaluation} />
         <Route path="/method/new" component={CreateMethod} />
         <Route path="/criteria/new" component={CreateCriteria} />
-        <Route path="/teams" component={ListTeams} />
+        <Route path="/teams" exact component={ListTeams} />
+        <Route path="/teams/:team_id" component={TeamPage} />
       </Switch>
     </BrowserRouter>
   )

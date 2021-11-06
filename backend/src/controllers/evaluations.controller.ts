@@ -20,7 +20,7 @@ class EvaluationsController {
   public getByTeam = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const teamId = Number(req.params.team);
-      const evaluations: Evaluation[] = await this.evaluationService.findByTeam(teamId);
+      const evaluations: Evaluation[] = await this.evaluationService.findByTeam(teamId, true);
 
       res.status(200).json({ data: evaluations });
     } catch (error) {

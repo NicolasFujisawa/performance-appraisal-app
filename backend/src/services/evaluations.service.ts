@@ -15,8 +15,11 @@ class EvaluationService {
     return this._evaluationRepository;
   }
 
-  public async findByTeam(team: number): Promise<Evaluation[]> {
-    const evaluations: Evaluation[] = await this.evaluationRepository.find({ where: { team } });
+  public async findByTeam(team: number, fillRelations: boolean = false): Promise<Evaluation[]> {
+    const relations = fillRelations
+      ? ['method', 'method.criterias', 'method.criterias.criteriaScores', 'team', 'team.members', 'team.members.student', 'team.teacher']
+      : [];
+    const evaluations: Evaluation[] = await this.evaluationRepository.find({ where: { team }, relations });
     return evaluations;
   }
 
