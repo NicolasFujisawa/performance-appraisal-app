@@ -14,6 +14,7 @@ class TeamsRoute implements Routes {
   private initializeRoutes() {
     this.router.post(`${this.path}/`, this.controller.create);
     this.router.get(`${this.path}/`, this.controller.findAll);
+    this.router.get(`${this.path}/:id(\\d+)`, this.controller.getTeamById);
   }
 }
 

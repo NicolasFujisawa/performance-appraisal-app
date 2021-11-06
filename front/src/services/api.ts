@@ -12,6 +12,7 @@ import { GetScoresResponse } from '../interfaces/get.scores.response'
 import { GetTeamsResponse } from '../interfaces/get.teams.response'
 import { SendCreateEvaluationPayload } from '../interfaces/send.createevaluation.payload'
 import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
+import { GetTeamId } from '../interfaces/get.team.id'
 
 const instance = axios.create({
   baseURL: 'http://localhost:8080/',
@@ -51,6 +52,9 @@ export const getMethods = async () =>
   instance.get<GetMethodsResponse>(`/methods`)
 
 export const getTeams = async () => instance.get<GetTeamsResponse>(`/teams`)
+
+export const getTeamById = async (teamId: number) =>
+  instance.get<GetTeamId>(`/teams/${teamId}`)
 
 export const authLogin = async (payload: { identifier: string }) =>
   instance.post<AuthResponseDto>('/auth/login', payload)

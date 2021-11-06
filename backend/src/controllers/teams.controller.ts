@@ -24,6 +24,17 @@ class TeamsController {
       next(error);
     }
   };
+
+  public getTeamById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const teamId = Number(req.params.id);
+      const findOneTeamData: Team = await this.teamsService.findTeamById(teamId);
+
+      res.status(200).json({ data: findOneTeamData, message: 'findOne' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default TeamsController;
