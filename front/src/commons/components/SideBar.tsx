@@ -1,4 +1,4 @@
-import { FiChevronLeft, FiList, FiPlus } from 'react-icons/fi'
+import { FiChevronLeft, FiList, FiPlus, FiDatabase } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom'
 import logoFatec365 from '../../images/logo.png'
 import { useAppSelector } from '../../store/hooks'
@@ -44,6 +44,13 @@ export default function SideBar() {
           <FiList size={24} color="rgba(0, 0, 0, 0.6)" />
           <p>Listar Equipes</p>
         </Link>
+
+        {role != 'teacher' && (
+          <Link to="/" className="link-app">
+            <FiDatabase size={24} color="rgba(0, 0, 0, 0.6)" />
+            <p>Recuperar Dados</p>
+          </Link>
+        )}
       </div>
       <footer>
         <button onClick={goBack} className="link-app">
