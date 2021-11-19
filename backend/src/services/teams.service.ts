@@ -1,8 +1,11 @@
 import { CreateTeamDto } from '@/dtos/create.team.dto';
+import { JoinTeamDto } from '@/dtos/join.team.dto';
+import { Student } from '@/entity/student.entity';
 import { Team } from '@/entity/team.entity';
+import { TeamMember } from '@/entity/teamMember.entity';
 import { HttpException } from '@exceptions/HttpException';
-import { getRepository, Repository } from 'typeorm';
 import { isEmpty } from '@utils/util';
+import { getRepository, Repository } from 'typeorm';
 
 class TeamsService {
   public team = Team;
@@ -30,6 +33,16 @@ class TeamsService {
 
   public async findAll() {
     return this.teamRepository.find();
+  }
+
+  public async joinTeam({ studentId, teamId }: JoinTeamDto) {
+    const studentRepository = getRepository(Student);
+    const teamMemberRepository = getRepository(TeamMember);
+
+    const student = await studentRepository.findOneOrFail(studentId);
+    const team = await this.teamRepository.findOneOrFail(teamId);
+
+    await teamMemberRepository.save({ student, team });
   }
 }
 

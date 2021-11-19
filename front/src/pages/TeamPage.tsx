@@ -4,8 +4,13 @@ import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import SideBar from '../commons/components/SideBar'
 import { Evaluation } from '../interfaces/evaluation'
+import { StudentJoinTeam } from '../interfaces/student.join.team'
 import { Team } from '../interfaces/team'
-import { getEvaluationByTeam, getTeamById } from '../services/api'
+import {
+  getEvaluationByTeam,
+  getTeamById,
+  studentJoinTeam
+} from '../services/api'
 import { selectUser } from '../store/selectors'
 import '../styles/pages/team-page.css'
 
@@ -38,9 +43,32 @@ export function TeamPage() {
     loadTeam()
   }, [])
 
-  function handleJoin(event: FormEvent) {
+  async function handleJoin(event: FormEvent) {
     event.preventDefault()
-    // TODO criar api para entrar no time
+
+    const payload: StudentJoinTeam = {
+      studentId: userId,
+      teamId,
+    }
+
+    try {
+      await studentJoinTeam(payload)
+
+      const teamMembers = [
+        ...(team?.members as any),
+        {
+          teamMemberId: 1,
+          student: { studentId: userId },
+        },
+      ]
+      const newTeam: Team = { ...team, members: teamMembers } as Team
+
+      setTeam(newTeam)
+
+      alert('Voce ingressou na equipe!')
+    } catch (error) {
+      alert('Ocorreu algum erro. Tente novamente mais tarde.')
+    }
   }
 
   function isUserNotInTeam() {
@@ -60,7 +88,7 @@ export function TeamPage() {
         <div id="page-container">
           {role === 'student' && isUserNotInTeam() && (
             <>
-              <button onSubmit={handleJoin}>Ingressar</button>
+              <button onClick={handleJoin}>Ingressar</button>
             </>
           )}
           <h1 className="title">Equipe</h1>

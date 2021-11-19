@@ -1,4 +1,5 @@
 import { CreateTeamDto } from '@/dtos/create.team.dto';
+import { JoinTeamDto } from '@/dtos/join.team.dto';
 import { Team } from '@/entity/team.entity';
 import TeamsService from '@/services/teams.service';
 import { NextFunction, Request, Response } from 'express';
@@ -31,6 +32,17 @@ class TeamsController {
       const findOneTeamData: Team = await this.teamsService.findTeamById(teamId);
 
       res.status(200).json({ data: findOneTeamData, message: 'findOne' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public joinTeam = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const body: JoinTeamDto = req.body;
+      await this.teamsService.joinTeam(body);
+
+      res.status(201).json({ message: 'Success' });
     } catch (error) {
       next(error);
     }
