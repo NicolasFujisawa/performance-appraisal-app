@@ -16,7 +16,7 @@ import { selectUser } from '../store/selectors'
 export default function CreateCriteria() {
   const [name, setName] = useState('')
   const [criteriaScore, setCriteriaScore] = useState('')
-  const [criteriaScoreIndexer, setCriteriaScoreIndexer] = useState(0)
+  const [criteriaScoreIndexer, setCriteriaScoreIndexer] = useState(1)
   const [criteria, setCriteria] = useState<CriteriaPayload>(
     {} as CriteriaPayload
   )
@@ -33,7 +33,7 @@ export default function CreateCriteria() {
   function clearData() {
     setName('')
     setCriteriaScore('')
-    setCriteriaScoreIndexer(0)
+    setCriteriaScoreIndexer(1)
     setCriteria({} as CriteriaPayload)
   }
 
@@ -62,7 +62,7 @@ export default function CreateCriteria() {
     )
     criteriaClone.criteriaScores = sortCriteriasValue(criteriaScoresFiltered)
     setCriteria(criteriaClone)
-    setCriteriaScoreIndexer(criteriaScoreIndexer - 1)
+    setCriteriaScoreIndexer(criteriaScoreIndexer - 1 || 1)
   }
 
   function sortCriteriasValue(
@@ -70,7 +70,7 @@ export default function CreateCriteria() {
   ): CriteriaScorePayload[] {
     const criteriasSorted = criteriaScores.sort((props) => props.value)
     criteriasSorted.forEach(function (value, index, array) {
-      array[index].value = index
+      array[index].value = index + 1
     }, criteriasSorted)
     return criteriasSorted
   }
