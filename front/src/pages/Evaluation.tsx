@@ -5,7 +5,11 @@ import { CriteriasResponse } from '../interfaces/criterias.response'
 import { Evaluation as IEvaluation } from '../interfaces/evaluation'
 import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
 import { TeamMember } from '../interfaces/team'
-import { getEvaluation, sendEvaluationScores } from '../services/api'
+import {
+  getEvaluation,
+  getNotEvaluatedStudents,
+  sendEvaluationScores
+} from '../services/api'
 import { useAppSelector } from '../store/hooks'
 import { selectUser } from '../store/selectors'
 import '../styles/pages/evaluation-page.css'
@@ -43,7 +47,14 @@ export default function Evaluation() {
     } = await getEvaluation(parseInt(params.id))
     setEvaluation(data)
     setCriterias(data.method?.criterias)
-    setTeamMembers(data.team?.members)
+
+    const notEvaluatedStudents = await getNotEvaluatedStudents(
+      parseInt(params.id),
+      userId,
+      role
+    )
+
+    setTeamMembers(notEvaluatedStudents.data.data)
   }
 
   useEffect(() => {
@@ -85,8 +96,10 @@ export default function Evaluation() {
   function handleIndex() {
     const max = teamMembers.length - 1
     if (max > index) setIndex(index + 1)
-    if (max <= index)
+    if (max <= index) {
       alert(`Avaliação da equipe ${evaluation.team?.name} completa!`)
+      setIndex(-1)
+    }
   }
 
   if (!evaluation) {
@@ -106,47 +119,53 @@ export default function Evaluation() {
             </h2>
           </div>
           <hr />
-          <form
-            className="evaluation-form"
-            onSubmit={handleSubmit}
-            key={`student-evaluation-${currentStudent?.studentId}`}
-          >
-            <div className="student-name">
-              <h3>{currentStudent?.name}</h3>
-            </div>
-            {criterias?.map((criteria) => (
-              <div
-                className="criteria-field"
-                key={`criteria-${criteria.criteriaId}`}
-              >
-                <h3>{criteria.name}</h3>
-                <div className="criteria-scores">
-                  {criteria.criteriaScores?.map((criteriaScore) => (
-                    <div
-                      className="criteria-score-radio"
-                      key={`criteria-score-${criteriaScore.criteriaScoreId}`}
-                    >
-                      <input
-                        id={`${criteria.criteriaId}-${criteriaScore.criteriaScoreId}`}
-                        type="radio"
-                        name={`criteria-${criteria.criteriaId}-${currentStudent?.studentId}`}
-                        value={criteriaScore.criteriaScoreId}
-                        onChange={handleCriteriaScoreChange}
-                      />
-                      <label
-                        htmlFor={`${criteria.criteriaId}-${criteriaScore.criteriaScoreId}`}
-                      >
-                        {criteriaScore.name}
-                      </label>
-                    </div>
-                  ))}
-                </div>
+          {currentStudent?.studentId ? (
+            <form
+              className="evaluation-form"
+              onSubmit={handleSubmit}
+              key={`student-evaluation-${currentStudent?.studentId}`}
+            >
+              <div className="student-name">
+                <h3>{currentStudent?.name}</h3>
               </div>
-            ))}
-            <button className="confirm-button" type="submit">
-              Próximo
-            </button>
-          </form>
+              {criterias?.map((criteria) => (
+                <div
+                  className="criteria-field"
+                  key={`criteria-${criteria.criteriaId}`}
+                >
+                  <h3>{criteria.name}</h3>
+                  <div className="criteria-scores">
+                    {criteria.criteriaScores?.map((criteriaScore) => (
+                      <div
+                        className="criteria-score-radio"
+                        key={`criteria-score-${criteriaScore.criteriaScoreId}`}
+                      >
+                        <input
+                          id={`${criteria.criteriaId}-${criteriaScore.criteriaScoreId}`}
+                          type="radio"
+                          name={`criteria-${criteria.criteriaId}-${currentStudent?.studentId}`}
+                          value={criteriaScore.criteriaScoreId}
+                          onChange={handleCriteriaScoreChange}
+                        />
+                        <label
+                          htmlFor={`${criteria.criteriaId}-${criteriaScore.criteriaScoreId}`}
+                        >
+                          {criteriaScore.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <button className="confirm-button" type="submit">
+                Próximo
+              </button>
+            </form>
+          ) : (
+            <div>
+              <p>Não há estudantes para avaliar.</p>
+            </div>
+          )}
         </div>
       </main>
     </div>
