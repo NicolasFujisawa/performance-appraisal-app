@@ -30,12 +30,6 @@ form.evaluation-form .criteria-field {
   margin-bottom: 20px;
 }
 
-form.evaluation-form .criteria-scores {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-}
 
 form.evaluation-form .criteria-score-radio {
   display: flex;
@@ -46,6 +40,10 @@ form.evaluation-form .criteria-score-radio {
 form.evaluation-form input[type='radio'],
 form.evaluation-form label {
   cursor: pointer;
+}
+
+form.evaluation-form label {
+  margin-left: 5px;
 }
 
 form.evaluation-form button {
