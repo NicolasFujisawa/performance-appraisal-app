@@ -14,6 +14,7 @@ import { GetTeamId } from '../interfaces/get.team.id'
 import { GetTeamsResponse } from '../interfaces/get.teams.response'
 import { SendCreateEvaluationPayload } from '../interfaces/send.createevaluation.payload'
 import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
+import { StudentJoinTeam } from '../interfaces/student.join.team'
 
 const instance = axios.create({
   baseURL: 'http://localhost:8080/',
@@ -59,6 +60,9 @@ export const getTeamById = async (teamId: number) =>
 
 export const authLogin = async (payload: { identifier: string }) =>
   instance.post<AuthResponseDto>('/auth/login', payload)
+
+export const studentJoinTeam = async (payload: StudentJoinTeam) =>
+  instance.post('/teams/join', payload)
 
 export const getNotEvaluatedStudents = async (
   evaluationId: number,
