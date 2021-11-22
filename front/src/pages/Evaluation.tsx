@@ -126,6 +126,7 @@ export default function Evaluation() {
               key={`student-evaluation-${currentStudent?.studentId}`}
             >
               <div className="student-name">
+                {currentStudent.studentId === userId ? (<p className="auto-evaluation">Autoavaliação</p>) : ''}
                 <h3>{currentStudent?.name}</h3>
               </div>
               {criterias?.map((criteria) => (

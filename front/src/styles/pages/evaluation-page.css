@@ -30,6 +30,15 @@ form.evaluation-form .criteria-field {
   margin-bottom: 20px;
 }
 
+p.auto-evaluation {
+  display: inline-block;
+  background-color: #3cdc8c;
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
 
 form.evaluation-form .criteria-score-radio {
   display: flex;
