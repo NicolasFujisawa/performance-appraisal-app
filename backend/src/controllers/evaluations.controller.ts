@@ -44,9 +44,9 @@ class EvaluationsController {
       const { studentId, evaluationId } = req.params;
       const role = req.query.role as string;
 
-      const createData = await this.evaluationService.findNotEvaluatedStudents({ studentId, evaluationId, role });
+      const notEvaluatedStudentsData = await this.evaluationService.findNotEvaluatedStudents({ studentId, evaluationId, role });
 
-      res.status(201).json({ data: createData });
+      res.status(201).json({ data: notEvaluatedStudentsData });
     } catch (error) {
       next(error);
     }
