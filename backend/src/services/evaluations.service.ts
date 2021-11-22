@@ -59,7 +59,6 @@ class EvaluationService {
       student st on st.student_id = tm.student_id
     where
         ev.evaluation_id = ${evaluationId} and
-        ${role === 'student' ? `tm.student_id != ${studentId} and` : ''}
         tm.student_id not in (
           select
             distinct evaluated_student_id
