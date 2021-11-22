@@ -8,6 +8,7 @@ import {
   GetEvaluationsResponse
 } from '../interfaces/get.evaluation.response'
 import { GetMethodsResponse } from '../interfaces/get.methods.response'
+import { GetNotEvaluatedStudentsResponse } from '../interfaces/get.not.evaluated.students.response'
 import { GetScoresResponse } from '../interfaces/get.scores.response'
 import { GetTeamId } from '../interfaces/get.team.id'
 import { GetTeamsResponse } from '../interfaces/get.teams.response'
@@ -62,5 +63,14 @@ export const authLogin = async (payload: { identifier: string }) =>
 
 export const studentJoinTeam = async (payload: StudentJoinTeam) =>
   instance.post('/teams/join', payload)
+
+export const getNotEvaluatedStudents = async (
+  evaluationId: number,
+  studentId: number,
+  role: string
+) =>
+  instance.get<GetNotEvaluatedStudentsResponse>(
+    `/evaluations/${evaluationId}/not-evaluated-students/${studentId}?role=${role}`
+  )
 
 export default instance
