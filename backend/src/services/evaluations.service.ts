@@ -1,4 +1,5 @@
 import { CreateEvaluationDto } from '@/dtos/create.evaluation.dto';
+import { TeamMember } from '@/entity/teamMember.entity';
 import { Evaluation } from '@entity/evaluation.entity';
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty } from '@utils/util';
@@ -42,6 +43,34 @@ class EvaluationService {
     const createEvaluation: Evaluation = await this.evaluationRepository.save({ ...payload });
 
     return createEvaluation;
+  }
+
+  public async findNotEvaluatedStudents({ studentId, evaluationId, role = 'student' }) {
+    type queryResult = { teamMemberId: number; studentId: number; name: string };
+
+    const result: queryResult[] = await getRepository(Evaluation).query(`
+    select
+      tm.student_id as "studentId",
+      st.name
+    from team_member tm
+    inner join
+      evaluation ev on ev."teamTeamId" = tm.team_id
+    inner join
+      student st on st.student_id = tm.student_id
+    where
+        ev.evaluation_id = ${evaluationId} and
+        ${role === 'student' ? `tm.student_id != ${studentId} and` : ''}
+        tm.student_id not in (
+          select
+            distinct evaluated_student_id
+          from score
+          where
+            evaluation_id = ${evaluationId} and
+            ${role === 'student' ? 'evaluator_student_id' : 'evaluator_teacher_id'} = ${studentId}
+        )`);
+
+    const teamMembers: TeamMember[] = result.map(row => ({ student: { studentId: row.studentId, name: row.name } } as TeamMember));
+    return teamMembers;
   }
 }
 

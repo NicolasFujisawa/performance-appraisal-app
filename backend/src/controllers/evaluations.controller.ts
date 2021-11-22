@@ -38,6 +38,19 @@ class EvaluationsController {
       next(error);
     }
   };
+
+  public findNotEvaluatedStudents = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { studentId, evaluationId } = req.params;
+      const role = req.query.role as string;
+
+      const notEvaluatedStudentsData = await this.evaluationService.findNotEvaluatedStudents({ studentId, evaluationId, role });
+
+      res.status(201).json({ data: notEvaluatedStudentsData });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default EvaluationsController;
