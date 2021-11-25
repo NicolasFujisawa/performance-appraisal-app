@@ -80,7 +80,7 @@ export default function Evaluation() {
     event.preventDefault()
     const payload = buildRequestPayload()
     await sendEvaluationScores(payload)
-    handleIndex()
+    handleIndex(true)
     setFormValues({ studentId: 0, criterias: {} })
   }
 
