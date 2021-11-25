@@ -7,4 +7,5 @@ export interface SendCreateEvaluationPayload {
   isLastEvaluation: boolean
   method: { methodId: number }
   team: { teamId: number }
+  isAnonymous: boolean
 }

@@ -23,6 +23,10 @@ export class Evaluation {
   @IsBoolean()
   isLastEvaluation: boolean;
 
+  @Column()
+  @IsBoolean()
+  isAnonymous: boolean;
+
   @ManyToOne(() => Method, method => method.evaluations)
   @JoinColumn({ name: 'method_id' })
   method: Method;
