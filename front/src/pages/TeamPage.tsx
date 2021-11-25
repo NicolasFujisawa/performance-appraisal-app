@@ -86,11 +86,6 @@ export function TeamPage() {
       <SideBar />
       <main>
         <div id="page-container">
-          {role === 'student' && isUserNotInTeam() && (
-            <>
-              <button onClick={handleJoin}>Ingressar</button>
-            </>
-          )}
           <h1 className="title">Equipe</h1>
           <h2>{team?.name}</h2>
           <h1 className="title">Participantes</h1>
@@ -127,6 +122,11 @@ export function TeamPage() {
             <Link className="link" to="/evaluation/new">
               <div id="newEvaluation">Nova Avaliação</div>
             </Link>
+          )}
+          {role === 'student' && isUserNotInTeam() && (
+            <>
+              <button className="join-button" onClick={handleJoin}>Ingressar na equipe</button>
+            </>
           )}
         </div>
       </main>
