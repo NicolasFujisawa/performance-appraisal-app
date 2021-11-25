@@ -93,13 +93,21 @@ export default function Evaluation() {
     setFormValues(newFormValues)
   }
 
-  function handleIndex() {
+  function handleIndex(finish = false) {
     const max = teamMembers.length - 1
     if (max > index) setIndex(index + 1)
     if (max <= index) {
-      alert(`Avaliação da equipe ${evaluation.team?.name} completa!`)
-      setIndex(-1)
+      if (finish) {
+        alert(`Avaliação da equipe ${evaluation.team?.name} completa!`)
+        setIndex(-1)
+      } else {
+        setIndex(0)
+      }
     }
+  }
+
+  function skipStudent() {
+    handleIndex()
   }
 
   if (!evaluation) {
@@ -158,6 +166,10 @@ export default function Evaluation() {
                   </div>
                 </div>
               ))}
+              <button className="confirm-button" type="button" onClick={skipStudent}>
+                Pular
+              </button>
+              <br />
               <button className="confirm-button" type="submit">
                 Próximo
               </button>
