@@ -1,13 +1,21 @@
-import { FiChevronLeft, FiList, FiPlus, FiDatabase } from 'react-icons/fi'
+import { FiList, FiPlus, FiDatabase } from 'react-icons/fi'
+import { CgLogOut } from 'react-icons/cg'
 import { Link, useHistory } from 'react-router-dom'
 import logoFatec365 from '../../images/logo.png'
-import { useAppSelector } from '../../store/hooks'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { selectUser } from '../../store/selectors'
 import '../../styles/components/sidebar.css'
+import { logOut } from '../../store/slices/userSlice'
 
 export default function SideBar() {
-  const { goBack } = useHistory()
+  const history = useHistory()
   const { role } = useAppSelector(selectUser)
+  const dispatch = useAppDispatch()
+
+  function handleLogOut() {
+    dispatch(logOut())
+    history.push('/login')
+  }
 
   return (
     <aside className="app-sidebar">
@@ -48,8 +56,9 @@ export default function SideBar() {
         )}
       </div>
       <footer>
-        <button onClick={goBack} className="link-app">
-          <FiChevronLeft size={24} color="rgba(0, 0, 0, 0.6)" />
+        <button onClick={handleLogOut} className="soft-link">
+          <CgLogOut size={24} color="#ffd761" />
+          <p>Logout</p>
         </button>
       </footer>
     </aside>
