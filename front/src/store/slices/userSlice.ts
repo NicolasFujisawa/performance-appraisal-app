@@ -5,13 +5,14 @@ const userSlice = createSlice({
   name: 'user',
   initialState: {} as User,
   reducers: {
-    logIn: (state, action: PayloadAction<User>) => {
+    logIn: (state: User, action: PayloadAction<User>) => {
       const { userId, role } = action.payload
       state.userId = userId
       state.role = role
     },
-    logOut: (state) => {
-      state = {} as User
+    logOut: (state: User) => {
+      delete state.userId
+      delete state.role
     },
   },
 })
