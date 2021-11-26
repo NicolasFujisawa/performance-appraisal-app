@@ -20,7 +20,7 @@ export function Landing() {
           <p>Obtenha insights valiosos para o crescimento da turma.</p>
         </main>
 
-        <Link to={userId ? '/evaluation/new' : '/login'} className="enter-app">
+        <Link to={userId ? '/teams' : '/login'} className="enter-app">
           <FiArrowRight
             className="font-left"
             size={26}

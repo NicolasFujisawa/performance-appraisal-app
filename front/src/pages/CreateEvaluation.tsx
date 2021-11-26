@@ -15,14 +15,16 @@ interface FormValues {
   isLastEvaluation: boolean
   methodId: number
   teamId: number
+  anonymous: string
 }
 
 export default function Evaluation() {
   const [methods, setMethods] = useState<MethodsResponse>()
   const [teams, setTeams] = useState<TeamsResponse>()
   const [formValues, setFormValues] = useState<FormValues>({
-    start: '2021-07-10',
+    start: new Date().toISOString().slice(0, 10),
     isLastEvaluation: false,
+    anonymous: '2',
   } as FormValues)
   const { role } = useAppSelector(selectUser)
 
@@ -52,6 +54,7 @@ export default function Evaluation() {
       isLastEvaluation: formValues.isLastEvaluation,
       method: { methodId: formValues.methodId },
       team: { teamId: formValues.teamId },
+      isAnonymous: formValues.anonymous === '1',
     }
   }
   async function handleSubmit(event: FormEvent) {
@@ -143,17 +146,30 @@ export default function Evaluation() {
               onChange={handleInputChange}
             />
           </div>
-          {/* <div className="input-block">
-            <label>Manter Anonimato?</label>
+          <div className="input-block">
+            <label>Manter anonimato?</label>
             <div>
-              <input type="radio" value="1" name="anonymous" required checked={formValues.anonymous == 1}/>
+              <input
+                type="radio"
+                value="1"
+                name="anonymous"
+                required
+                checked={formValues.anonymous === '1'}
+                onChange={handleInputChange}
+              />
               <label>Sim</label>
             </div>
             <div>
-              <input type="radio" value="2" name="anonymous" checked={formValues.anonymous == 2}/>
+              <input
+                type="radio"
+                value="2"
+                name="anonymous"
+                checked={formValues.anonymous === '2'}
+                onChange={handleInputChange}
+              />
               <label>Não</label>
             </div>
-          </div> */}
+          </div>
           <button className="create-method" type="submit">
             Confirmar
           </button>

@@ -31,6 +31,7 @@ aside.app-sidebar a + a {
 }
 
 aside.app-sidebar .link-app,
+aside.app-sidebar .soft-link,
 aside.app-sidebar button {
   min-height: 48px;
   min-width: 48px;
@@ -51,6 +52,14 @@ aside.app-sidebar button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+aside.app-sidebar .soft-link {
+  font-weight: 800;
+  font-size: 24px;
+  background: none;
+
+  color: #ffd761;
 }
 
 aside.app-sidebar a:hover,
