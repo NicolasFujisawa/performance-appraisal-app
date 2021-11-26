@@ -16,3 +16,7 @@ h2 {
 h3 {
   font-size: 24px;
 }
+
+.evaluation-result-container:not(:last-child){
+  margin-bottom: 30px;
+}
