@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import CreateCriteria from './pages/CreateCriteria'
 import CreateEvaluation from './pages/CreateEvaluation'
@@ -8,10 +9,10 @@ import ListTeams from './pages/ListTeams'
 import { Login } from './pages/Login'
 import Results from './pages/Results'
 import { TeamPage } from './pages/TeamPage'
+import { selectUser } from './store/selectors'
 
-
-const renderComponent = (route: string, component: () => JSX.Element) => {
-  const shouldRedirectToLogin = true;
+const renderComponent = (route: string, component: () => JSX.Element, userId: number | undefined) => {
+  const shouldRedirectToLogin = userId === undefined ? true : false;
 
   if (shouldRedirectToLogin) {
     return <Redirect to="/login" />
@@ -21,19 +22,21 @@ const renderComponent = (route: string, component: () => JSX.Element) => {
 }
 
 function Routes() {
+  const { userId } = useSelector(selectUser)
+
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/login" component={Login} />
 
-        {renderComponent('/', Landing)}
-        {renderComponent("/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results", Results)}
-        {renderComponent("/evaluation/new", CreateEvaluation)}
-        {renderComponent("/evaluation/:id", Evaluation)}
-        {renderComponent("/method/new", CreateMethod)}
-        {renderComponent("/criteria/new", CreateCriteria)}
-        {renderComponent("/teams", ListTeams)}
-        {renderComponent("/teams/:team_id", TeamPage)}
+        {renderComponent('/', Landing, userId)}
+        {renderComponent("/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results", Results, userId)}
+        {renderComponent("/evaluation/new", CreateEvaluation, userId)}
+        {renderComponent("/evaluation/:id", Evaluation, userId)}
+        {renderComponent("/method/new", CreateMethod, userId)}
+        {renderComponent("/criteria/new", CreateCriteria, userId)}
+        {renderComponent("/teams", ListTeams, userId)}
+        {renderComponent("/teams/:team_id", TeamPage, userId)}
       </Switch>
     </BrowserRouter>
   )
