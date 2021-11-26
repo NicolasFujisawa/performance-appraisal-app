@@ -16,8 +16,10 @@ import { SendCreateEvaluationPayload } from '../interfaces/send.createevaluation
 import { SendEvaluationScoresPayload } from '../interfaces/send.evaluation.scores.payload'
 import { StudentJoinTeam } from '../interfaces/student.join.team'
 
+export const BASE_URL = 'http://localhost:8080/'
+
 const instance = axios.create({
-  baseURL: 'http://localhost:8080/',
+  baseURL: BASE_URL,
 })
 
 export const sendEvaluationScores = async (

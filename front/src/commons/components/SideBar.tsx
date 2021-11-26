@@ -2,14 +2,15 @@ import { FiList, FiPlus, FiDatabase } from 'react-icons/fi'
 import { CgLogOut } from 'react-icons/cg'
 import { Link, useHistory } from 'react-router-dom'
 import logoFatec365 from '../../images/logo.png'
+import { BASE_URL } from '../../services/api'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { selectUser } from '../../store/selectors'
 import '../../styles/components/sidebar.css'
 import { logOut } from '../../store/slices/userSlice'
 
 export default function SideBar() {
+  const { role, userId } = useAppSelector(selectUser)
   const history = useHistory()
-  const { role } = useAppSelector(selectUser)
   const dispatch = useAppDispatch()
 
   function handleLogOut() {
@@ -47,15 +48,19 @@ export default function SideBar() {
           <FiList size={24} color="rgba(0, 0, 0, 0.6)" />
           <p>Listar Equipes</p>
         </Link>
-
-        {role != 'teacher' && (
-          <Link to="/" className="link-app">
-            <FiDatabase size={24} color="rgba(0, 0, 0, 0.6)" />
-            <p>Recuperar Dados</p>
-          </Link>
-        )}
       </div>
       <footer>
+        {role === 'student' && (
+          <a
+            href={`${BASE_URL}lgpd/data?userId=${userId}`}
+            className="soft-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FiDatabase size={24} color="#ffd761" />
+            <p>Recuperar Dados</p>
+          </a>
+        )}
         <button onClick={handleLogOut} className="soft-link">
           <CgLogOut size={24} color="#ffd761" />
           <p>Logout</p>
