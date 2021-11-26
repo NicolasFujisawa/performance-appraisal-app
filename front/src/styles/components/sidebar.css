@@ -66,3 +66,8 @@ aside.app-sidebar a:hover,
 aside.app-sidebar button:hover {
   filter: brightness(117%);
 }
+
+aside.app-sidebar footer {
+  display: flex;
+  flex-direction: column;
+}
