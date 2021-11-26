@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import CreateCriteria from './pages/CreateCriteria'
 import CreateEvaluation from './pages/CreateEvaluation'
 import CreateMethod from './pages/CreateMethod'
@@ -9,22 +9,31 @@ import { Login } from './pages/Login'
 import Results from './pages/Results'
 import { TeamPage } from './pages/TeamPage'
 
+
+const renderComponent = (route: string, component: () => JSX.Element) => {
+  const shouldRedirectToLogin = true;
+
+  if (shouldRedirectToLogin) {
+    return <Redirect to="/login" />
+  }
+
+  return <Route path={route} component={component} />;
+}
+
 function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Landing} />
-        <Route
-          path="/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results"
-          component={Results}
-        />
         <Route path="/login" component={Login} />
-        <Route path="/evaluation/new" component={CreateEvaluation} />
-        <Route path="/evaluation/:id" component={Evaluation} />
-        <Route path="/method/new" component={CreateMethod} />
-        <Route path="/criteria/new" component={CreateCriteria} />
-        <Route path="/teams" exact component={ListTeams} />
-        <Route path="/teams/:team_id" component={TeamPage} />
+
+        {renderComponent('/', Landing)}
+        {renderComponent("/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results", Results)}
+        {renderComponent("/evaluation/new", CreateEvaluation)}
+        {renderComponent("/evaluation/:id", Evaluation)}
+        {renderComponent("/method/new", CreateMethod)}
+        {renderComponent("/criteria/new", CreateCriteria)}
+        {renderComponent("/teams", ListTeams)}
+        {renderComponent("/teams/:team_id", TeamPage)}
       </Switch>
     </BrowserRouter>
   )
