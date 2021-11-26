@@ -1,13 +1,14 @@
 import { FiChevronLeft, FiList, FiPlus, FiDatabase } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom'
 import logoFatec365 from '../../images/logo.png'
+import { BASE_URL } from '../../services/api'
 import { useAppSelector } from '../../store/hooks'
 import { selectUser } from '../../store/selectors'
 import '../../styles/components/sidebar.css'
 
 export default function SideBar() {
   const { goBack } = useHistory()
-  const { role } = useAppSelector(selectUser)
+  const { role, userId } = useAppSelector(selectUser)
 
   return (
     <aside className="app-sidebar">
@@ -40,11 +41,16 @@ export default function SideBar() {
           <p>Listar Equipes</p>
         </Link>
 
-        {role != 'teacher' && (
-          <Link to="/" className="link-app">
+        {role !== 'teacher' && (
+          <a
+            href={`${BASE_URL}lgpd/data?userId=${userId}`}
+            className="link-app"
+            target="_blank"
+            rel="noreferrer"
+          >
             <FiDatabase size={24} color="rgba(0, 0, 0, 0.6)" />
             <p>Recuperar Dados</p>
-          </Link>
+          </a>
         )}
       </div>
       <footer>
