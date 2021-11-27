@@ -26,6 +26,13 @@ export default function Results() {
   const params = useParams<ResultsParams>()
   const { userId } = useAppSelector(selectUser)
 
+  let evaluatorsName = scores?.map((score) => (
+    score.evaluatorStudent.name
+  ))
+  evaluatorsName = evaluatorsName?.filter((name, index) => (
+    evaluatorsName?.indexOf(name) === index
+  ))
+
   useEffect(() => {
     const loadScores = async () => {
       const {
@@ -88,6 +95,18 @@ export default function Results() {
           </div>
           <div className="evaluation-result-container">
             <h1>Minha média</h1>
+            {
+              !evaluation.isAnonymous && (
+                <div className="evaluators">
+                <p>Avaliado por:</p>
+                {
+                  evaluatorsName?.map((name) => (
+                    <p>{name}</p>
+                  ))
+                }
+                </div>
+              )
+            }
             {scores ? (
               <EvaluationChart
                 evaluatedName={evaluatedName}
