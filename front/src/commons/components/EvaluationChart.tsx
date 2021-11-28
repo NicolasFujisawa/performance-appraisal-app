@@ -69,6 +69,13 @@ export default function EvaluationChart(props: any) {
     return ((scoresValuesAverage + 1) / criteriaScoreLength) * 100 || 0
   }
 
+  if (!scores.length)
+    return (
+      <div>
+        <p>Você não recebeu avaliações.</p>
+      </div>
+    )
+
   return (
     <RadarChart outerRadius={90} width={570} height={250} data={dataChart}>
       <PolarGrid />

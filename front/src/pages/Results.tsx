@@ -1,12 +1,14 @@
-import '../styles/pages/main-page.css'
-import '../styles/pages/results-page.css'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+import EvaluationChart from '../commons/components/EvaluationChart'
+import SideBar from '../commons/components/SideBar'
 import { Evaluation as IEvaluation } from '../interfaces/evaluation'
 import { ScoresResponse as IScoresResponse } from '../interfaces/scores.response'
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router'
-import { getEvaluation, getEvaluatedStudentScores } from '../services/api'
-import SideBar from '../commons/components/SideBar'
-import EvaluationChart from '../commons/components/EvaluationChart'
+import { getEvaluatedStudentScores, getEvaluation } from '../services/api'
+import { useAppSelector } from '../store/hooks'
+import { selectUser } from '../store/selectors'
+import '../styles/pages/main-page.css'
+import '../styles/pages/results-page.css'
 
 interface ResultsParams {
   evaluation_id: string
@@ -16,10 +18,13 @@ interface ResultsParams {
 export default function Results() {
   const [evaluation, setEvaluation] = useState<IEvaluation>()
   const [scores, setScores] = useState<IScoresResponse>()
+  const [autoEvaluationScores, setAutoEvaluationScores] =
+    useState<IScoresResponse>()
   const [finalDate, setFinalDate] = useState<Date>()
   const [evaluatedName, setEvaluatedName] = useState('')
 
   const params = useParams<ResultsParams>()
+  const { userId } = useAppSelector(selectUser)
 
   useEffect(() => {
     const loadScores = async () => {
@@ -29,7 +34,13 @@ export default function Results() {
         parseInt(params.evaluated_id),
         parseInt(params.evaluation_id)
       )
-      setScores(data)
+
+      setScores(
+        data.filter((score) => score.evaluatorStudent.studentId !== userId)
+      )
+      setAutoEvaluationScores(
+        data.filter((score) => score.evaluatorStudent.studentId === userId)
+      )
       setEvaluatedName(data[0]?.evaluatedStudent.name)
     }
     const loadEvaluation = async () => {
@@ -63,16 +74,30 @@ export default function Results() {
             {evaluation.team?.name} - {evaluation.name}
           </h3>
           <br />
-          <h1>Resultados</h1>
-          {scores ? (
-            <EvaluationChart
-              evaluatedName={evaluatedName}
-              scores={scores}
-              evaluation={evaluation}
-            />
-          ) : (
-            <p>Carregando...</p>
-          )}
+          <div className="evaluation-result-container">
+            <h1>Autoavaliação</h1>
+            {autoEvaluationScores ? (
+              <EvaluationChart
+                evaluatedName={evaluatedName}
+                scores={autoEvaluationScores}
+                evaluation={evaluation}
+              />
+            ) : (
+              <p>Carregando...</p>
+            )}
+          </div>
+          <div className="evaluation-result-container">
+            <h1>Minha média</h1>
+            {scores ? (
+              <EvaluationChart
+                evaluatedName={evaluatedName}
+                scores={scores}
+                evaluation={evaluation}
+              />
+            ) : (
+              <p>Carregando...</p>
+            )}
+          </div>
         </div>
       </main>
     </div>
