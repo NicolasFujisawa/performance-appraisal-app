@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux'
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import LoginCheck from './commons/components/AuthComponent'
 import CreateCriteria from './pages/CreateCriteria'
 import CreateEvaluation from './pages/CreateEvaluation'
 import CreateMethod from './pages/CreateMethod'
@@ -9,34 +9,23 @@ import ListTeams from './pages/ListTeams'
 import { Login } from './pages/Login'
 import Results from './pages/Results'
 import { TeamPage } from './pages/TeamPage'
-import { selectUser } from './store/selectors'
-
-const renderComponent = (route: string, component: () => JSX.Element, userId: number | undefined) => {
-  const shouldRedirectToLogin = userId === undefined ? true : false;
-
-  if (shouldRedirectToLogin) {
-    return <Redirect to="/login" />
-  }
-
-  return <Route path={route} component={component} />;
-}
 
 function Routes() {
-  const { userId } = useSelector(selectUser)
-
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login" component={Login} />
-
-        {renderComponent('/', Landing, userId)}
-        {renderComponent("/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results", Results, userId)}
-        {renderComponent("/evaluation/new", CreateEvaluation, userId)}
-        {renderComponent("/evaluation/:id", Evaluation, userId)}
-        {renderComponent("/method/new", CreateMethod, userId)}
-        {renderComponent("/criteria/new", CreateCriteria, userId)}
-        {renderComponent("/teams", ListTeams, userId)}
-        {renderComponent("/teams/:team_id", TeamPage, userId)}
+      <Route path="/" exact component={Landing} />
+      <Route path="/login" component={Login} />
+        <Route
+          path="/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results"
+          component={() => LoginCheck(Results)}
+        />
+        <Route path="/evaluation/new" component={() => LoginCheck(CreateEvaluation)} />
+        <Route path="/evaluation/:id" component={() => LoginCheck(Evaluation)} />
+        <Route path="/method/new" component={() => LoginCheck(CreateMethod)} />
+        <Route path="/criteria/new" component={() => LoginCheck(CreateCriteria)} />
+        <Route path="/teams" exact component={() => LoginCheck(ListTeams)} />
+        <Route path="/teams/:team_id" component={() => LoginCheck(TeamPage)} />
       </Switch>
     </BrowserRouter>
   )
