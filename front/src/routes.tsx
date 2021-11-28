@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import LoginCheck from './commons/components/AuthComponent'
 import CreateCriteria from './pages/CreateCriteria'
 import CreateEvaluation from './pages/CreateEvaluation'
 import CreateMethod from './pages/CreateMethod'
@@ -13,18 +14,18 @@ function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Landing} />
+      <Route path="/" exact component={Landing} />
+      <Route path="/login" component={Login} />
         <Route
           path="/evaluation/:evaluation_id/evaluatedStudent/:evaluated_id/results"
-          component={Results}
+          component={() => LoginCheck(Results)}
         />
-        <Route path="/login" component={Login} />
-        <Route path="/evaluation/new" component={CreateEvaluation} />
-        <Route path="/evaluation/:id" component={Evaluation} />
-        <Route path="/method/new" component={CreateMethod} />
-        <Route path="/criteria/new" component={CreateCriteria} />
-        <Route path="/teams" exact component={ListTeams} />
-        <Route path="/teams/:team_id" component={TeamPage} />
+        <Route path="/evaluation/new" component={() => LoginCheck(CreateEvaluation)} />
+        <Route path="/evaluation/:id" component={() => LoginCheck(Evaluation)} />
+        <Route path="/method/new" component={() => LoginCheck(CreateMethod)} />
+        <Route path="/criteria/new" component={() => LoginCheck(CreateCriteria)} />
+        <Route path="/teams" exact component={() => LoginCheck(ListTeams)} />
+        <Route path="/teams/:team_id" component={() => LoginCheck(TeamPage)} />
       </Switch>
     </BrowserRouter>
   )
