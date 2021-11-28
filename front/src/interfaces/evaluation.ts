@@ -7,6 +7,7 @@ export interface Evaluation {
   start: string
   end: string
   isLastEvaluation: boolean
+  isAnonymous: boolean
   method: {
     methodId: number
     name: string
