@@ -18,6 +18,17 @@ class ScoreController {
     }
   };
 
+  public findByEvaluation = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const evaluationId = Number(req.params.evaluation);
+      const scores: Score[] = await this.service.findByEvaluation(evaluationId);
+
+      res.status(200).json({ data: scores });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public create = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const payload: CreateScoreDto[] = req.body;
