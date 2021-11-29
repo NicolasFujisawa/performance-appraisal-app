@@ -9,7 +9,7 @@ import { Team } from '../interfaces/team'
 import {
   getEvaluationByTeam,
   getTeamById,
-  studentJoinTeam
+  studentJoinTeam,
 } from '../services/api'
 import { selectUser } from '../store/selectors'
 import '../styles/pages/team-page.css'
@@ -115,6 +115,14 @@ export function TeamPage() {
                     {evaluation.name} - Em Andamento
                   </Link>
                 )}
+                {role === 'teacher' && (
+                  <Link
+                    className="link"
+                    to={`/evaluation/${evaluation.evaluationId}/results`}
+                  >
+                    Ver Resultados
+                  </Link>
+                )}
               </div>
             )
           })}
@@ -125,7 +133,9 @@ export function TeamPage() {
           )}
           {role === 'student' && isUserNotInTeam() && (
             <>
-              <button className="join-button" onClick={handleJoin}>Ingressar na equipe</button>
+              <button className="join-button" onClick={handleJoin}>
+                Ingressar na equipe
+              </button>
             </>
           )}
         </div>

@@ -6,6 +6,8 @@
 }
 
 .item-evaluation {
+  display: flex;
+  justify-content: space-between;
   padding: 15px;
   border: 1px solid #00000075;
   background-color: #d8d8d8;

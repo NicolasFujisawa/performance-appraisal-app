@@ -66,13 +66,13 @@ export default function EvaluationChart(props: any) {
     const scoresValuesAverage = scoresValuesSum / scoreValues.length || 0
 
     const criteriaScoreLength = criteria.criteriaScores?.length || 0
-    return ((scoresValuesAverage + 1) / criteriaScoreLength) * 100 || 0
+    return (scoresValuesAverage / criteriaScoreLength) * 100 || 0
   }
 
   if (!scores.length)
     return (
       <div>
-        <p>Você não recebeu avaliações.</p>
+        <p>{evaluatedName} não recebeu avaliações.</p>
       </div>
     )
 

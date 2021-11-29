@@ -5,7 +5,7 @@ import { GetCriteriasResponse } from '../interfaces/criterias.response'
 import { CriteriaPayload } from '../interfaces/criterias.scores.payload'
 import {
   GetEvaluationResponse,
-  GetEvaluationsResponse
+  GetEvaluationsResponse,
 } from '../interfaces/get.evaluation.response'
 import { GetMethodsResponse } from '../interfaces/get.methods.response'
 import { GetNotEvaluatedStudentsResponse } from '../interfaces/get.not.evaluated.students.response'
@@ -42,6 +42,9 @@ export const getEvaluatedStudentScores = async (
   instance.get<GetScoresResponse>(
     `/scores/evaluation/${evaluationId}/evaluatedStudent/${evaluatedStudentId}`
   )
+
+export const getEvaluationScores = async (evaluationId: number) =>
+  instance.get<GetScoresResponse>(`/scores/evaluation/${evaluationId}`)
 
 export const sendCriteria = async (payload: CriteriaPayload) =>
   instance.post('/criterias', { ...payload })
