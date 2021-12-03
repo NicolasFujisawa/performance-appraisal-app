@@ -49,6 +49,6 @@ Server: http://localhost:8080/
 ### Sprint 4
 
 - Pequenas correções nas telas
-- Inclusão de um gráfico melhorado na tela de resultados
-- Usabilidade do usuário
+- Inclusão de um grafico de auto avaliação na tela de resultados
+- Nova tela de resultados para o professor
 - Inclusão da regra de LGPD
